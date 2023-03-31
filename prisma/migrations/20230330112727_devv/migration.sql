@@ -1,0 +1,7 @@
+-- AlterTable
+ALTER TABLE "Admins" ALTER COLUMN "createdAt" DROP NOT NULL,
+ALTER COLUMN "updatedAt" DROP NOT NULL,
+ALTER COLUMN "emails" DROP NOT NULL;
+
+-- AlterTable
+ALTER TABLE "Blocs" ALTER COLUMN "emails" DROP NOT NULL;
