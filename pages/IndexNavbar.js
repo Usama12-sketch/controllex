@@ -22,7 +22,7 @@ const Navbar = () => {
       }} className={`bg-slate-400 md:bg-white  lg:bg-white-400 flex  left-0
       md:flex-row md:mx-0 md:relative md:mt-0
       lg:flex-row lg:mx-0 Lg:relative lg:mt-0
-       duration-500 flex-col fixed mt-14 top-0  ` + (display === "text-2xl" ? "-mx-32" : "text-2xl" )}>
+       duration-500 flex-col fixed mt-14 top-0  ` + (display === "text-2xl" ? "-mx-32" : "text-2xl" )}> 
 
       <Link className=' bg-gray-500   m-1 p-1 rounded-lg hover:bg-green-300 duration-300 shadow-md   ease-in-out text-yellow-300 font-bold font-sans hover:text-gray-600 ' href={'/'}>Home</Link>
       
