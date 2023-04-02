@@ -3,11 +3,11 @@ import Image from 'next/image'
 import { Inter } from '@next/font/google'
 
 import Query from '@/components/Data-Emails/Query'
-import prisma from '../lib/prisma'
+import prisma from '../../lib/prisma'
 import { getSession } from 'next-auth/react'
 import { authOptions } from '../api/auth/[...nextauth]'
 import GetPost from '../../components/GetPost'
-import { SafeJson } from '../lib/formatHelpers'
+import { SafeJson } from '../../lib/formatHelpers'
 
 
 

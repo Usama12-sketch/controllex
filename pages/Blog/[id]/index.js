@@ -1,8 +1,8 @@
-import prisma from '../../lib/prisma'
+import prisma from '../../../lib/prisma'
 import React from 'react'
 // import Post from '../../components/Create'
 import Deletebtn from '../../../components/Edit'
-import { SafeJson, safeJson } from "../../lib/formatHelpers";
+import { SafeJson, safeJson } from "../../../lib/formatHelpers";
 import { useState, useRef } from 'react';
 import { useSession } from "next-auth/react";
 import Head from 'next/head';

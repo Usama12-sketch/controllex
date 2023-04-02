@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 import { useSession } from 'next-auth/react'
-import IndexDropDown from '../components/Main/Dropdowns/IndexDropdown'
+import IndexDropDown from './Main/Dropdowns/IndexDropdown'
 import Image from 'next/image'
 const Navbar = () => {
   const session = useSession(null)
