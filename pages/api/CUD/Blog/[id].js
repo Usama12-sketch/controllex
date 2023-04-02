@@ -1,9 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/pages/lib/prisma';
 
 import { authOptions } from '../../auth/[...nextauth]';
 import { getServerSession } from 'next-auth/next';
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req, res) {
 
   const session = await getServerSession(req, res, authOptions);
   if (!session) {
@@ -21,18 +20,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (req.method === 'PUT') {
     const projectId = req.query.id 
-    const { name, emails, img} = req.body;
-    console.log({ name });
-    const result = await prisma.admins.update({
+    const { title, content, img } = req.body;
+    console.log({ title });
+    const result = await prisma.post.update({
       where: { id: projectId },
-      data: { name , emails, img },
+      data: { title , content, img },
     })
     res.json(result);
   }
 
   if (req.method === 'DELETE') {
     const projectId = req.query.id ;
-    const result = await prisma.admins.delete({
+    const result = await prisma.post.delete({
       where: { id: projectId }
     });
     res.json(result);

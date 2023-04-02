@@ -19,6 +19,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/index.jsx", "pages/api/CUD/Admins/[id].js", "pages/api/CUD/Admins/index.js", "pages/api/CUD/Blocks/[id].js", "pages/api/CUD/Blocks/index.js", "pages/api/CUD/Blog/[id].js", "pages/api/CUD/Blog/index.js", "pages/api/CUD/Draft/[id].js", "pages/api/CUD/Draft/index.js", "pages/api/CUD/updateDes/[id].js", "pages/api/CUD/updateDes/index.js", "pages/api/CUD/User/[id].js", "pages/api/CUD/User/index.js", "pages/api/Get/getPosts/index.js", "pages/api/Get/getUsers/index.js"],
   "exclude": ["node_modules"]
 }
