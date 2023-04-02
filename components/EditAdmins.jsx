@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 
 import { useSession } from "next-auth/react";
 
-const EditAdmins = ({ id, emailsform, name, img , user}) => {
+const EditAdmins = ({ id, emailsform, url, name, img , user}) => {
   const router = useRouter(false)
   const session = useSession(false)
 
@@ -17,7 +17,7 @@ const EditAdmins = ({ id, emailsform, name, img , user}) => {
   }
 
   async function deleteposts(id) {
-    const post = await fetch(`/api/CUD/Admins/${id}`, {
+    const post = await fetch(`${url}/${id}`, {
       method: 'DELETE',
 
 
@@ -29,7 +29,7 @@ const EditAdmins = ({ id, emailsform, name, img , user}) => {
 
 
   async function updateposts(data) {
-    const post = await fetch(`/api/CUD/Admins/${id}`, {
+    const post = await fetch(`${url}/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
       headers: {
@@ -48,7 +48,7 @@ const EditAdmins = ({ id, emailsform, name, img , user}) => {
     <div className=' z-40'>
       <div className='flex flex-col z-40  gap-4 '>
         <div className=' flex gap-10'>
-  <button className='bg-blue-500 rounded  p-2 w-min' onClick={() => { setForm({emails:emailsform, name:name , img:img }); setDisplay("block") }}>Edit</button>
+  <button className=' bg-gradient-to-tr from-blue-600 rounded  p-1 w-min' onClick={() => { setForm({emails:emailsform, name:name , img:img }); setDisplay("block") }}>Edit</button>
 
         </div>
         <br />
