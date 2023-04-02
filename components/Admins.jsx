@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Image from 'next/image'
 import EditAdmins from './EditAdmins'
 const Admin = ({Admins , url}) => {
       return  Admins.map((block) => <div className=' flex flex-col' key={block.id}>
@@ -15,7 +15,7 @@ const Admin = ({Admins , url}) => {
 
   <div className=' h-10 overflow-hidden rounded-3xl w-10'>
 
-<img src=
+<Image width={20} height={20} layout="intrinsic"  src=
  {block.img}
  alt="" />
  </div>
