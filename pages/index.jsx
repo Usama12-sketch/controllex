@@ -7,16 +7,26 @@ import Navbar from '../components/IndexNavbar'
 import Query from '@/components/Data-Emails/Query'
 import UpdateDescription from '@/components/Data-Emails/update'
 import prisma from '../lib/prisma'
-import { getSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import { authOptions } from './api/auth/[...nextauth]'
+import { useRouter } from 'next/router'
 // import { SafeJson } from './lib/formatHelpers'
 
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({post}) {
-  return (
-    <>
+
+  const router = useRouter()
+  const session = useSession()
+  if(session.status === 'unauthenticated') 
+  {
+    router.replace('/Blog')
+  } else if (session.status === 'authenticated') {
+
+    
+    return (
+      <>
       <Head>
         <title>Controllex</title>
         
@@ -38,23 +48,32 @@ export default function Home({post}) {
     </>
   )
 }
+}
 
 export const getServerSideProps = async ({req}) =>{
   const session = await getSession({req, authOptions})
- let  data = await  prisma.user.findUnique({
-  where:{
-    email: session.user.email
-  },
-include:{
-  Post: true,
-}
- })
- 
- 
- const serializedData = JSON.stringify(data);
- const safeData = JSON.parse(serializedData);   
- console.log(safeData)
- return{ props: {
-   post: safeData,
-  }}
+  if(session){
+
+    let  data = await  prisma.user.findUnique({
+      where:{
+        email: session.user.email
+      },
+      include:{
+        Post: true,
+      }
+    })
+    
+    
+    const serializedData = JSON.stringify(data);
+    const safeData = JSON.parse(serializedData);   
+    console.log(safeData)
+    return{ props: {
+      post: safeData,
+    }}
+  }
+
+  else{
+  
+    return { props: { } }
+  }
   }

@@ -4,35 +4,41 @@ import Post from '../../components/Create'
 import Deletebtn from '../../components/Edit'
 import { SafeJson, safeJson } from "../../lib/formatHelpers";
 import { useState, useRef } from 'react';
-import { useSession } from "next-auth/react";
 import EditAdmins from '../../components/EditAdmins';
+import { useSession } from "next-auth/react";
+
+import { useRouter } from 'next/router'
 
 
 
 const Blog = ({ Admins, }) => {
-  const session = useSession(false)
   const [ NotAdmin, setNotadmin] = useState()
-
+  
   
   const url = "/api/CUD/Admins"
   const data =  { emails: '', name: '', img: '', }
   
   const [form, setForm] = useState(data)
   
-
+  
   useEffect(() => {
     const timer = setTimeout(() => {
       setNotadmin( "Alert! you are not Usama")
     }
-, 2000);
+    , 2000);
     return () => clearTimeout(timer);
   }, []);
-
-
+  
+  
   console.log(Admins)
-
-  return (
-    <div className=' bg-gradient-to-br from-yellow-200 to-pink-600 text-red-500'>
+  const session = useSession(false)
+  const router = useRouter()
+  if(session.status === 'unauthenticated'){
+    router.replace('/Blog')
+  }
+ else if(session.status === 'authenticated'){
+   return (
+     <div className=' bg-gradient-to-br from-yellow-200 to-pink-600 text-red-500'>
 <Suspense fallback={<div> {session.data?.user?.name} is waiting for surprise</div>}>
 
 
@@ -77,6 +83,7 @@ const Blog = ({ Admins, }) => {
 </Suspense>
     </div>
   )
+}
 }
 
 export default Blog

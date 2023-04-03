@@ -4,10 +4,11 @@ import { Inter } from '@next/font/google'
 
 import Query from '@/components/Data-Emails/Query'
 import prisma from '../../lib/prisma'
-import { getSession } from 'next-auth/react'
 import { authOptions } from '../api/auth/[...nextauth]'
 import GetPost from '../../components/GetPost'
 import { SafeJson } from '../../lib/formatHelpers'
+import { getSession, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 
 
@@ -16,8 +17,16 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home({post, Blocks, Admins, beta}) {
     const url = "/api/CUD/Draft"
     const urlA = "/api/CUD/Blog"
-  return (
-    <>
+
+    const session = useSession()
+    const router = useRouter()
+    if(session.status === 'unauthenticated'){
+router.replace('/Blog')
+    }
+   else if(session.status === 'authenticated'){
+
+      return (
+        <>
       <Head>
         <title>Drafts</title>
         
@@ -38,6 +47,7 @@ export default function Home({post, Blocks, Admins, beta}) {
               </main>
     </>
   )
+}
 }
 
 export const getServerSideProps = async ({req}) =>{
