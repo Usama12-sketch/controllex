@@ -4,10 +4,11 @@ import { Inter } from '@next/font/google'
 
 import Query from '@/components/Data-Emails/Query'
 import prisma from '../../lib/prisma'
-import { getSession } from 'next-auth/react'
 import { authOptions } from '../api/auth/[...nextauth]'
 import GetPost from '../../components/GetPost'
 import { SafeJson } from '../../lib/formatHelpers'
+import { getSession, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 
 
@@ -16,8 +17,16 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home({post, Blocks, Admins, beta}) {
     const url = "/api/CUD/Draft"
     const urlA = "/api/CUD/Blog"
-  return (
-    <>
+
+    const session = useSession()
+    const router = useRouter()
+    if(session.status === 'unauthenticated'){
+router.replace('/Blog')
+    }
+   else if(session.status === 'authenticated'){
+
+      return (
+        <>
       <Head>
         <title>Drafts</title>
         
@@ -39,30 +48,33 @@ export default function Home({post, Blocks, Admins, beta}) {
     </>
   )
 }
+}
 
 export const getServerSideProps = async ({req}) =>{
   const session = await getSession({req, authOptions})
-  let beta = await prisma.draft.findMany({
-    include:{
-        user: true,
-    }
-  })
- let  data = await  prisma.user.findUnique({
-  where:{
-    email: session.user.email
-  },
-include:{
-  draft: true,
-}
- })
+  if(session){
 
- 
- let Blocks = await prisma.blocs.findMany()
- let Admins = await prisma.admins.findMany()
- 
- Blocks = SafeJson(Blocks)
- Admins = SafeJson(Admins)
- beta = SafeJson(beta)
+    let beta = await prisma.draft.findMany({
+      include:{
+        user: true,
+      }
+    })
+    let  data = await  prisma.user.findUnique({
+      where:{
+        email: session.user.email
+  },
+  include:{
+    draft: true,
+  }
+})
+
+
+let Blocks = await prisma.blocs.findMany()
+let Admins = await prisma.admins.findMany()
+
+Blocks = SafeJson(Blocks)
+Admins = SafeJson(Admins)
+beta = SafeJson(beta)
 
  
  const serializedData = JSON.stringify(data);
@@ -71,4 +83,8 @@ include:{
  return{ props: {
    post: safeData, Blocks, Admins, beta
   }}
-  }
+}
+else {
+  return {props: {}}
+}
+}

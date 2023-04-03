@@ -1,15 +1,18 @@
+import { getSession, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+
 import prisma from '../../lib/prisma'
 import React, { useEffect, } from 'react'
 import Post from '../../components/Create'
 import { SafeJson, safeJson } from "../../lib/formatHelpers";
 import { useState, useRef } from 'react';
-import { useSession } from "next-auth/react";
+
 import Users from '../../components/Users';
 import Admin from '../../components/Admins';
 
 
 const Blog = ({ Admins, users }) => {
-  const session = useSession(false)
+
   const [NotAdmin, setNotadmin] = useState()
 
 
@@ -29,9 +32,14 @@ const Blog = ({ Admins, users }) => {
 
 
   console.log(Admins)
-
-  return (
-    <div className='flex flex-col justify-evenly bg-gradient-to-br from-yellow-500 to-pink-700 '>
+  const session = useSession()
+  const router = useRouter()
+  if(session.status === 'unauthenticated'){
+router.replace('/Blog')
+  }
+ else if(session.status === 'authenticated'){
+   return (
+     <div className='flex flex-col justify-evenly bg-gradient-to-br from-yellow-500 to-pink-700 '>
 
 
 
@@ -92,6 +100,7 @@ const Blog = ({ Admins, users }) => {
     </div>
   )
 }
+}
 
 export default Blog
 
@@ -102,7 +111,7 @@ export const getServerSideProps = async () => {
       user: true
     }
   })
-
+  
   Admins = SafeJson(Admins)
   users = SafeJson(users)
   return {
