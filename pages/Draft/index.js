@@ -50,29 +50,34 @@ router.replace('/Blog')
 }
 }
 
+
+
+
 export const getServerSideProps = async ({req}) =>{
   const session = await getSession({req, authOptions})
-  let beta = await prisma.draft.findMany({
-    include:{
-        user: true,
-    }
-  })
- let  data = await  prisma.user.findUnique({
-  where:{
-    email: session.user.email
-  },
-include:{
-  draft: true,
-}
- })
+  if(session){
 
- 
- let Blocks = await prisma.blocs.findMany()
- let Admins = await prisma.admins.findMany()
- 
- Blocks = SafeJson(Blocks)
- Admins = SafeJson(Admins)
- beta = SafeJson(beta)
+    let beta = await prisma.draft.findMany({
+      include:{
+        user: true,
+      }
+    })
+    let  data = await  prisma.user.findUnique({
+      where:{
+        email: session.user.email
+  },
+  include:{
+    draft: true,
+  }
+})
+
+
+let Blocks = await prisma.blocs.findMany()
+let Admins = await prisma.admins.findMany()
+
+Blocks = SafeJson(Blocks)
+Admins = SafeJson(Admins)
+beta = SafeJson(beta)
 
  
  const serializedData = JSON.stringify(data);
@@ -81,4 +86,9 @@ include:{
  return{ props: {
    post: safeData, Blocks, Admins, beta
   }}
-  }
+}
+else {
+  return {props: {}}
+}
+}
+
