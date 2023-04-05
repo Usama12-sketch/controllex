@@ -7,8 +7,9 @@ import Post from '../../components/Create'
 import { SafeJson, safeJson } from "../../lib/formatHelpers";
 import { useState, useRef } from 'react';
 
-import Users from '../../components/Users';
-import Admin from '../../components/Admins';
+import Users from '@/components/Dashboard/Users';
+import Admin from '@/components/Dashboard/Admins';
+import Link from 'next/link'
 
 
 const Blog = ({ Admins, users }) => {
@@ -39,21 +40,25 @@ router.replace('/Blog')
   }
  else if(session.status === 'authenticated'){
    return (
-     <div className='flex flex-col justify-evenly bg-gradient-to-br from-yellow-500 to-pink-700 '>
+     <div className='bg-gray-600 p-2 hover:bg-gray-800 to-pink-700   '>
+
+     <div className=' p-3 bg-slate-100'>
+      <Link className='  bg-gradient-to-br from-orange-400  font-bold p-2 rounded-sm m-3' href='/Dashboard/'>Admins</Link>
+      <Link className='  bg-gradient-to-br from-red-400 text--300 font-bold p-2 rounded-sm m-3' href='/Dashboard/Blocks'>Blocks</Link>
+     </div>
 
 
 
-
-      <div className="flex gap-4 "></div>
+      
       {Admins.some((p) => p.emails === session.data?.user?.email) || session.data?.user?.email === "chodarykhan115@gmail.com" ? (<div className='  text-red-500'>
 
 
 
 
 
-        <div className='text-black flex flex-col h-screen gap-5'>
+        <div className=' flex flex-col h-full gap-5'>
 
-          <div className=' shadow-2xl shadow-green-500 h-screen   hover:bg-gray-800 transition-all duration-500 rounded-sm p-4 flex flex-col gap-5'>
+          <div className=' shadow-2xl  hover:bg-gray-00 transition-all duration-500 rounded-sm px-1 flex flex-col gap-5'>
             <span className=' text-blue-400 '>
               Email:
             </span>

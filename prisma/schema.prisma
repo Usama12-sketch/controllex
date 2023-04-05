@@ -8,16 +8,19 @@ datasource db {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
+  id        String     @id @default(cuid())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  title     String     @db.VarChar(255)
   content   String?
   img       String?
-  published Boolean  @default(false)
+  published Boolean    @default(false)
   userId    String?
-  user      User?    @relation(fields: [userId], references: [id])
+  Archives  Archives[]
+  Comments  Comments[]
+  user      User?      @relation(fields: [userId], references: [id])
 }
+
 model Draft {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -31,16 +34,17 @@ model Draft {
 }
 
 model Admins {
-  id        String   @id @default(cuid())
+  id        String    @id @default(cuid())
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
   name      String?
   img       String?
-  published Boolean  @default(false)
+  published Boolean   @default(false)
   userId    String?
   emails    String?
-  user      User?    @relation(fields: [userId], references: [id])
+  user      User?     @relation(fields: [userId], references: [id])
 }
+
 model Blocs {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
@@ -57,11 +61,11 @@ model Comments {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  comments  String
-  name      String?
-  img       String?
   published Boolean  @default(false)
   userId    String?
+  comment   String
+  postId    String?
+  Post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
   user      User?    @relation(fields: [userId], references: [id])
 }
 
@@ -100,11 +104,12 @@ model User {
   description   String?
   accounts      Account[]
   Admins        Admins[]
-  Blocs        Blocs[]
+  Archives      Archives[]
+  Blocs         Blocs[]
   comments      Comments[]
+  draft         Draft[]
   Post          Post[]
   sessions      Session[]
-  draft         Draft[]
 }
 
 model VerificationToken {
@@ -115,3 +120,11 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model Archives {
+  id            String     @id 
+  published Boolean  @default(false)
+  postId    String?
+  Post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userId    String?
+  User      User?   @relation(fields: [userId], references: [id])
+}

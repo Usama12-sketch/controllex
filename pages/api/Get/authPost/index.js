@@ -15,7 +15,8 @@ export default async function handler(req, res) {
           email: session.user.email,
         },
         include: {
-          Post: true
+          Post: true,
+          Archives: true
            
           },
         },
@@ -28,21 +29,4 @@ export default async function handler(req, res) {
   }
 
 
-if (req.method === "PUT") {
-  try {
-    const { description } = req.body
-    const updatedData = await prisma.user.update({
-      where: {
-        email: session.user.email
-      },
-      data: {
-        description
-      }
-    })
-
-    return res.status(200).json(updatedData)
-  } catch (err) {
-    res.status(500).json({ err: "Error has occurred while updating user data" })
-  }
-}
 }

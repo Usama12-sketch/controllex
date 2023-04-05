@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react"
 
 
 export default function UpdateDescription({setProjectState, projectState , des }) {
+  
   const [description, setDescription] = useState('')
 
   
@@ -24,7 +25,7 @@ const session = useSession()
 
       if (response.ok) {
         console.log("User description updated")
-        router.replace(router.asPath)
+        router.replace(router.asPath, undefined, {scroll: true})
         setProjectState("view")
       } else {
         console.error("Error updating user description")

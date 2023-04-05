@@ -1,4 +1,4 @@
-import ReuseableEdit from '../ReuseableEdit'
+import ReuseableEdit from '@/components/Edit/ReuseableEdit'
 import Link from 'next/link';
 
 import Image from 'next/image';

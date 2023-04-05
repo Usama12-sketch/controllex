@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import Link from 'next/link'
 import { useState } from 'react'
 // import { useRouter } from 'next/navigation'
 import { useRouter } from 'next/router'
@@ -23,7 +24,7 @@ const post = await fetch (url, {
 
 })
 console.log (post.json())
-router.replace(router.asPath)
+router.replace(router.asPath, undefined, {scroll: tue})
 
 rest()
 }
@@ -41,7 +42,7 @@ const post = await fetch (url2, {
 
 })
 console.log (post.json())
-router.replace(router.asPath)
+router.replace(router.asPath, undefined, {scroll: tue})
 
 rest()
 }
@@ -55,16 +56,17 @@ const path = router.pathname
     <div className='text-black flex flex-col gap-5' >
 
       {session.status === 'authenticated' && <div>
-
+ 
       <h1 className=' text-2xl font-bold'>
       {session.data.user.name}
       </h1>
       
       <div className=' relative rounded-3xl overflow-hidden h-10  w-10 mx-1'>
 <div className=' bg-transparent border-t-4 border-4 border-green-500 shadow-2xl shadow-green-400 rounded-xl animate-spin w-full h-full absolute top-0 left-0'></div>
-      <Image width={40} height={40} layout='intrinsic' src={session.data.user.image} alt="" />
+      <Image width={40} height={40}  src={session.data.user.image} alt="" />
 
 </div>
+
 
        
       </div>

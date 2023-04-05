@@ -1,21 +1,18 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
-import Navbar from '../components/IndexNavbar'
 
-import Query from '@/components/Data-Emails/Query'
-import UpdateDescription from '@/components/Data-Emails/update'
+import Profile from '@/components/Profile/Profile'
 import prisma from '../lib/prisma'
 import { getSession, useSession } from 'next-auth/react'
 import { authOptions } from './api/auth/[...nextauth]'
 import { useRouter } from 'next/router'
+import { SafeJson } from '@/lib/formatHelpers'
 // import { SafeJson } from './lib/formatHelpers'
 
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({post}) {
+export default function Home({post, Posts}) {
 
   const router = useRouter()
   const session = useSession()
@@ -35,15 +32,8 @@ export default function Home({post}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-    <div>
-      </div>    
-     
-      
-    <h1>
-      </h1>  
-    {/* <QueryWrapper> */}
-    {/* </QueryWrapper> */}
-      <Query Post={post.Post} data={post}/>
+        {Posts.name}
+      <Profile Post={post.Post} data={post}/>
               </main>
     </>
   )
@@ -53,22 +43,24 @@ export default function Home({post}) {
 export const getServerSideProps = async ({req}) =>{
   const session = await getSession({req, authOptions})
   if(session){
-
+  let Posts = await fetch("http://localhost:3000/api/Get/getPosts")
+        
     let  data = await  prisma.user.findUnique({
       where:{
         email: session.user.email
       },
       include:{
         Post: true,
+        Archives: true
       }
     })
-    
-    
+    Posts = SafeJson(Posts)
+    console.log(Posts)
     const serializedData = JSON.stringify(data);
     const safeData = JSON.parse(serializedData);   
-    console.log(safeData)
+    // console.log(safeData)
     return{ props: {
-      post: safeData,
+      post: safeData,  Posts
     }}
   }
 

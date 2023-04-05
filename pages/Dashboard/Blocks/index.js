@@ -1,13 +1,13 @@
-import prisma from '../../lib/prisma'
+import prisma from '../../../lib/prisma'
 import React, { useEffect, } from 'react'
-import Post from '../../components/Create'
-import { SafeJson, safeJson } from "../../lib/formatHelpers";
+import Post from '../../../components/Create'
+import { SafeJson, safeJson } from "../../../lib/formatHelpers";
 import { useState, useRef } from 'react';
 import { useSession } from "next-auth/react";
-import Users from '../../components/Users';
-import Admin from '../../components/Admins';
+import Users from '@/components/Dashboard/Users';
+import Admin from '@/components/Dashboard/Admins';
 import Head from 'next/head'
-
+import Link from 'next/link'
 const Blog = ({ Admins, users }) => {
   const session = useSession(false)
   const [NotAdmin, setNotadmin] = useState()
@@ -39,6 +39,11 @@ const Blog = ({ Admins, users }) => {
          </Head>
     <div className='flex flex-col justify-evenly bg-gradient-to-br from-yellow-500 to-pink-700 '>
 
+
+    <div className=' p-3 bg-slate-100'>
+      <Link className='  bg-gradient-to-br from-orange-400  font-bold p-2 rounded-sm m-3' href='/Dashboard/'>Admins</Link>
+      <Link className='  bg-gradient-to-br from-red-400 text--300 font-bold p-2 rounded-sm m-3' href='/Dashboard/Blocks'>Blocks</Link>
+     </div>
 
 
 

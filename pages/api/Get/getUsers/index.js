@@ -11,26 +11,5 @@ export default async function handler(req, res) {
   }
   
   
-  
-  
-
-  if(req.method === "POST")
-  try {
-  const { name, email } = req.body;
-  const result = await prisma.post.create({
-    data: {
-      name,
-      email,
-      
-    },
-  });
-return res.json(result);
-
-}
-
-
-catch (err) {
-  res.status(403).json({ err: "Error has occured while making a post" })
-} 
 }
 

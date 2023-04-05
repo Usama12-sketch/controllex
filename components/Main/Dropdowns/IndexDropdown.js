@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import {useState} from 'react'
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const IndexDropdown = () => {
   // dropdown props
@@ -11,7 +12,6 @@ const session = useSession(false)
   return (
     <div className="">
       <button
-        className="hover:text-blueGray-500 text-blueGray-700 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold rounded-sm shadow-2xl  my-1 bg-slate-400"
       
     
         onClick={(e) => {
@@ -19,7 +19,10 @@ const session = useSession(false)
         display === "hidden" ? setDisplay("block") : setDisplay("hidden")
         }}
       >
-         Pages
+         {session.status === 'authenticated' && <div className='relative bg-slate-500 py-5 overflow-hidden mx-10 rounded-3xl flex h-10 w-10justify-center items-center p'>
+  <Image width={40} height={40} layout='intrinsic' className='  bg-slate-300' src={session.data.user.image} alt="" />
+    </div>
+}
       </button>
       <div
         
@@ -35,7 +38,7 @@ const session = useSession(false)
         >
           Admin Layout
         </span>
-        <Link href="/admin/"
+        <Link href="/Dashboard/"
           
         
             className={
@@ -45,26 +48,8 @@ const session = useSession(false)
             Dashboard
           
         </Link>
-        <Link href="/admin/settings"
-        
-        
-            className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-            }
-          >
-            Settings
-        
-        </Link>
-        <Link href="/admin/tables"
-          
-        
-            className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-            }>
-          
-            Tables
-        
-        </Link>
+       
+   
 
         {session.status === "authenticated" && <Link href="/api/auth/signout"
             className={
@@ -92,7 +77,7 @@ const session = useSession(false)
             Login
         
         </Link>}
-        <Link href="/auth/register"
+        <Link href="#"
         
         
             className={
@@ -103,32 +88,20 @@ const session = useSession(false)
         
         </Link>
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
-        <span
-          className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-          }
-        >
-          No Layout
-        </span>
-        <Link href="/landing"
-          
-          
-            className={
-              "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-            }
-          >
-            Landing
-          
-        </Link>
-        <Link href="/profile"
+        
+    
+        <Link  href="/"
           
             
             className={
               "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
             }
           >
-            Profile
-         
+            {session.status === 'authenticated' && <div className='relative bg-slate-500 overflow-hidden mx-10 rounded-3xl flex h-8 w-8 shadow-xl shadow-green-400 justify-center items-center '>
+  <Image width={70} height={10} layout='intrinsic' className='  bg-slate-300' src={session.data.user.image} alt="" />
+    </div>
+}  
+  Profile
         </Link>
       </div>
     </div>

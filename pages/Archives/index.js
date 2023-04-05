@@ -1,22 +1,28 @@
+
 import prisma from '../../lib/prisma'
 import React, {useEffect, lazy, Suspense} from 'react'
 import Post from '../../components/Create'
-import Deletebtn from '../../components/Edit'
-import { SafeJson, safeJson } from "../../lib/formatHelpers";
+import { SafeJson, safeJson } from "@/lib/formatHelpers";
 import { useState, useRef } from 'react';
-import EditAdmins from '../../components/EditAdmins';
 import { useSession } from "next-auth/react";
 
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router'; 
 
 
 
-const Blog = ({ Admins, }) => {
+const Archives = ({ Admins,posts }) => {
   const [ NotAdmin, setNotadmin] = useState()
   
   
-  const url = "/api/CUD/Admins"
-  const data =  { emails: '', name: '', img: '', }
+async function Unarchive (id){
+  const archive = await fetch(`/api/CUD/archives/${id}`,{
+    method: 'DELETE',
+  })
+  router.replace(router.asPath, undefined, {scroll: false})
+}
+
+  const url = "/api/CUD/archives"
+  const data =  {  id:"",  }
   
   const [form, setForm] = useState(data)
   
@@ -53,20 +59,27 @@ const Blog = ({ Admins, }) => {
       <div className='text-black flex flex-col gap-5'>
 
         <div className=' shadow-2xl shadow-green-500 bg-gray-500 hover:bg-gray-800 transition-all duration-500 rounded-sm p-4 flex flex-col gap-5'>
-          <input  id='input1' className='transition-all duration-500    hover:rounded-sm' value={form.emails} onChange={e  => setForm({...form, emails: e.target.value  })}></input>
-
-          <textarea id='input2' className='transition-all duration-500 hover:rounded-sm' cols="30" rows="10" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}></textarea>
 
 
-          <input  className='transition-all duration-500 hover:rounded-sm' id='input3' value={form.img} onChange={e => setForm({ ...form, img: e.target.value })}></input>
+         
           <Post setForm={setForm} data={data} url={url} form={form} />
 
+          {posts.filter(post => Admins.some(archive => archive.id == post.id)).map((post, index) => {
+  return (
+    <ol className='bg-green-300 to-yellow-200 shadow-2xl flex flex-col gap-3' key={index}>
+      <div className='flex flex-col gap-1 bg-red-400 p-3'>
+        {/* <h1 className='font-mono w-max p-2 rounded-lg bg-slate-400 text-center'>{post.user.name}</h1> */}
+        {/* < layout='intrinsic' width={40} height={40} src={post.user.image} alt='' /> */}
+        <h1 className='bg-clip-text bg-gradient-to-br text-3xl font-serif'>{post.title}:</h1>
+        <p className='text-lg'>{post.content}</p>
+<button onClick={()=> Unarchive(post.id)}>UnArchive</button>
+      </div>
+    </ol>
+  );
+})}
 
-{Admins.map((block) => <div key={block.id}>email: {block.emails}
-<h1>name:{block.name}</h1>
-<h1>img:{block.img}</h1>
-<EditAdmins url={url} emailsform={block.emails} id={block.id} name={block.name} img={block.img} />
-</div>)}
+
+
 
         </div>
       </div>
@@ -86,18 +99,15 @@ const Blog = ({ Admins, }) => {
 }
 }
 
-export default Blog
+export default Archives
 
 export const getServerSideProps = async () => {
-  
-  let Admins = await prisma.admins.findMany({
-    include:{
-      user: true
-    }
-  })
+  let posts = await prisma.post.findMany()
+  let Admins = await prisma.archives.findMany()
   
   Admins = SafeJson(Admins)
+  posts = SafeJson(posts)
   return {
-    props: {  Admins, },
+    props: {  Admins, posts},
   };
 };

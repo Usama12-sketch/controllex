@@ -1,11 +1,11 @@
 "use client"
 import { useState } from 'react'
 import React from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 import { useSession } from "next-auth/react";
 
-const Reuseable = ({ id,setDisplay,display, url, url2,  setForm, form, user}) => {
+const ReuseableEdit = ({ id,setDisplay,display, url, url2,  setForm, form, user}) => {
   const router = useRouter(false)
   const session = useSession(false)
 
@@ -23,8 +23,8 @@ const Reuseable = ({ id,setDisplay,display, url, url2,  setForm, form, user}) =>
 
     })
     console.log(post.json())
-    router.refresh()
-
+    router.replace(router.asPath, undefined, {scroll: false})
+    setDisplay("hidden");
   }
 
 
@@ -39,8 +39,10 @@ const Reuseable = ({ id,setDisplay,display, url, url2,  setForm, form, user}) =>
 
     })
     console.log(post.json())
-    router.refresh()
+    setDisplay("hidden");
+    router.replace(router.asPath, undefined, {scroll: false})
     // reset()
+
     
   }
   async function posts(data) {
@@ -55,8 +57,8 @@ const Reuseable = ({ id,setDisplay,display, url, url2,  setForm, form, user}) =>
     })
     console.log(post.json())
     deleteposts(id)
-    // router.refresh()
-    // reset()
+    setDisplay("hidden");
+    router.replace(router.asPath, undefined, {scroll: false})    // reset()
     
   }
   const path = window.location.pathname;
@@ -118,4 +120,4 @@ const Reuseable = ({ id,setDisplay,display, url, url2,  setForm, form, user}) =>
   )
 }
 
-export default Reuseable
+export default ReuseableEdit

@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import EditAdmins from './EditAdmins'
+import EditAdmins from '../Edit/EditAdmins'
 const Admin = ({Admins , url}) => {
       return  Admins.map((block) => <div className=' flex flex-col' key={block.id}>
     <span className=' text-blue-400 '>
@@ -15,8 +15,7 @@ const Admin = ({Admins , url}) => {
 
   <div className=' h-10 overflow-hidden rounded-3xl w-10'>
 
-<Image width={20} height={20} layout="intrinsic"  src=
- {block.img}
+<Image width={20} height={20}   src={block.img}
  alt="" />
  </div>
   

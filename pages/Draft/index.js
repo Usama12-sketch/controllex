@@ -1,12 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
-
-import Query from '@/components/Data-Emails/Query'
-import prisma from '../../lib/prisma'
+import prisma from '@/lib/prisma'
 import { authOptions } from '../api/auth/[...nextauth]'
-import GetPost from '../../components/GetPost'
-import { SafeJson } from '../../lib/formatHelpers'
+import MainPosts from '@/components/Get/MainPosts'
+import { SafeJson } from '@/lib/formatHelpers'
 import { getSession, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
@@ -43,7 +41,7 @@ router.replace('/Blog')
       </h1>  
     
       {/* <Query Post={post.draft} data={post}/> */}
-      <GetPost url={url} url2={urlA} posts={beta} Blocks={Blocks} Admins={Admins}/>
+      <MainPosts url={url} url2={urlA} posts={beta} Blocks={Blocks} Admins={Admins}/>
               </main>
     </>
   )

@@ -1,11 +1,11 @@
 "use client"
 import { useState } from 'react'
 import React from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 import { useSession } from "next-auth/react";
 
-const EditBlocs = ({ id, emailsform, name, img , user}) => {
+const EditAdmins = ({ id, emailsform, url, name, img , user}) => {
   const router = useRouter(false)
   const session = useSession(false)
 
@@ -17,19 +17,20 @@ const EditBlocs = ({ id, emailsform, name, img , user}) => {
   }
 
   async function deleteposts(id) {
-    const post = await fetch(`/api/CUD/Blocks/${id}`, {
+    const post = await fetch(`${url}/${id}`, {
       method: 'DELETE',
 
 
     })
     console.log(post.json())
-    router.refresh()
-
+    router.replace(router.asPath, undefined, {scroll: false})
+    reset()
+    setDisplay("hidden");
   }
 
 
   async function updateposts(data) {
-    const post = await fetch(`/api/CUD/Blocks/${id}`, {
+    const post = await fetch(`${url}/${id}`, {
       method: 'PUT',
       body: JSON.stringify(data),
       headers: {
@@ -39,7 +40,9 @@ const EditBlocs = ({ id, emailsform, name, img , user}) => {
 
     })
     console.log(post.json())
-    router.refresh()
+    router.replace(router.asPath, undefined, {scroll: false})
+    reset()
+    setDisplay("hidden");
     // reset()
     
   }
@@ -48,7 +51,7 @@ const EditBlocs = ({ id, emailsform, name, img , user}) => {
     <div className=' z-40'>
       <div className='flex flex-col z-40  gap-4 '>
         <div className=' flex gap-10'>
-  <button className='bg-blue-500 rounded  p-2 w-min' onClick={() => { setForm({emails:emailsform, name:name , img:img }); setDisplay("block") }}>Edit</button>
+  <button className=' bg-gradient-to-tr from-blue-600 rounded  p-1 w-min' onClick={() => { setForm({emails:emailsform, name:name , img:img }); setDisplay("block") }}>Edit</button>
 
         </div>
         <br />
@@ -79,4 +82,4 @@ const EditBlocs = ({ id, emailsform, name, img , user}) => {
   )
 }
 
-export default EditBlocs
+export default EditAdmins
