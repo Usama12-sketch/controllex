@@ -12,7 +12,7 @@ import { SafeJson } from '@/lib/formatHelpers'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({post, Posts}) {
+export default function Home({post,}) {
 
   const router = useRouter()
   const session = useSession()
@@ -32,7 +32,7 @@ export default function Home({post, Posts}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {Posts.name}
+        
       <Profile Post={post.Post} data={post}/>
               </main>
     </>
@@ -43,7 +43,7 @@ export default function Home({post, Posts}) {
 export const getServerSideProps = async ({req}) =>{
   const session = await getSession({req, authOptions})
   if(session){
-  let Posts = await fetch("http://localhost:3000/api/Get/getPosts")
+  
         
     let  data = await  prisma.user.findUnique({
       where:{
@@ -54,13 +54,13 @@ export const getServerSideProps = async ({req}) =>{
         Archives: true
       }
     })
-    Posts = SafeJson(Posts)
-    console.log(Posts)
+  
+    
     const serializedData = JSON.stringify(data);
     const safeData = JSON.parse(serializedData);   
     // console.log(safeData)
     return{ props: {
-      post: safeData,  Posts
+      post: safeData,  
     }}
   }
 
