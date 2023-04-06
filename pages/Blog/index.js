@@ -74,7 +74,6 @@ export const getStaticProps = async () => {
   let posts = await prisma.post.findMany({
     include: {
       user: true
-      
     }
   });
   let archives = await prisma.archives.findMany()
