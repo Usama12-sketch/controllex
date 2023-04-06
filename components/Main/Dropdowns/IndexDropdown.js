@@ -19,8 +19,13 @@ const session = useSession(false)
         display === "hidden" ? setDisplay("block") : setDisplay("hidden")
         }}
       >
+         {session.status === 'unauthenticated' &&  <div className='relative bg-slate-500 py-5 overflow-hidden mx-10 rounded-3xl flex h-10 justify-center items-center p'>
+    <Image  width={40} height={40} className=' w-10 bg-slate-300' src={'https://www.karachiliteraturefestival.com/wp-content/uploads/2019/02/Zia-Mohyeddin.jpg'} alt="" />
+ <h1 className='z-30 text-white absolute hover:bg-green-400 hover:block h-40 duration-500 w-40 hover:bg-opacity-40'></h1>
+    </div>
+}
          {session.status === 'authenticated' && <div className='relative bg-slate-500 py-5 overflow-hidden mx-10 rounded-3xl flex h-10 w-10justify-center items-center p'>
-  <Image width={40} height={40} layout='intrinsic' className='  bg-slate-300' src={session.data.user.image} alt="" />
+  <Image width={40} height={40} className='  bg-slate-300' src={session.data.user.image} alt="" />
     </div>
 }
       </button>
