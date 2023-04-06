@@ -8,8 +8,9 @@ export default function App({ Component, pageProps, }) {
     
     <Navbar  />
     
-
+<div className='pt-12'>
    <Component {...pageProps} ></Component>
+</div>
   
   </Authcontext>
   </>

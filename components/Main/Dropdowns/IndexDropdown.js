@@ -1,17 +1,28 @@
 "use client"
 import React from "react";
 import Link from "next/link";
-import {useState} from 'react'
+import {useState, useRef} from 'react'
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 const IndexDropdown = () => {
   // dropdown props
+
+  const hidesearch = () => {
+    hideTimeoutRef.current = setTimeout(() => {
+      setDisplay("hidden");
+      // setSearch("")
+    }, 500);
+  };
+
+  const hideTimeoutRef = useRef(null);
+
 const session = useSession(false)
  const [display, setDisplay] = useState("hidden")
   return (
     <div className="">
       <button
+       onBlur={hidesearch}
         onClick={(e) => {
           e.preventDefault();
         display === "hidden" ? setDisplay("block") : setDisplay("hidden")

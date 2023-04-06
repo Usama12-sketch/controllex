@@ -13,7 +13,7 @@ function Profile({Post, data}) {
 
     const session = useSession()
     return (
-        <div className=' bg-gradient-to-tr from-blue-300 rounded-sm h-screen  to-yellow-200 p-7 flex flex-col gap-4'>
+        <div className=' bg-gradient-to-tr from-blue-300 rounded-sm h-full  to-yellow-200 p-7 flex flex-col gap-4'>
         
             <h1 className=' bg-clip-text bg-gradient-to-b from-blue-700 to-yellow-500 shadow-2xl rounded-lg  font-bold text-transparent text-3xl border-4 p-2 '>Profile of {data.name}</h1> 
            

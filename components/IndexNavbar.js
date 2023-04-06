@@ -31,15 +31,17 @@ const Navbar = ({}) => {
   };
   const [search , setSearch] = useState("")
   const [blur , setBlur] = useState(false)
+
   return (
-    <div  className='duration-500 bg-gradient-to-br from-slate-800 hover:bg-black flex w-screen items-center justify-between'>
-      <Link className=' bg-gray-500   m-1 p-1 rounded-lg hover:bg-green-300 duration-300 shadow-md   ease-in-out text-red-500 font-bold font-sans hover:text-gray-600 ' href={'/Blog'}>Controllex</Link>
+  
+  <div  className='duration-500 hover:py-2 fixed bg-black bg-opacity-50 z-30   flex w-screen items-center justify-between'>
+  
+      <Link className=' m-1 p-1 rounded-lg text-shadow-xl text-lg hover:text-green-500 duration-300  bg-gradient-to-br ease-in-out text-blue-300 font-bold font-sans ' href={'/Blog'}>Controllex</Link>
 
-<div  onClick={()=> setBlur(true)} onBlur={hidesearch}  className='flex w-max  mx-4 bg-gray-400  rounded-md  '>
+<div  onClick={()=> setBlur(true)} onBlur={hidesearch}  className='flex w-max  mx-4   rounded-md  '>
 
 
-
-      <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
+    <input className=' rounded-xl px-2 bg-gray-300 font-semibold font-mono' type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
       
 <div className={`${blur ? "flex": "hidden" } mt-10 flex-col absolute bg-white`}>
 
@@ -62,7 +64,7 @@ const Navbar = ({}) => {
         </ol>)}
 </div>
 </div>
-    <div className='w-max  relative top-0 h-min right-0'> 
+    <div className='w-max relative top-0 h-min right-0'> 
     <IndexDropDown></IndexDropDown>
     </div>
 
