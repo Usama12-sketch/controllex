@@ -61,8 +61,8 @@ async function Unarchive (id){
         <div className=' shadow-2xl shadow-green-500 bg-gray-500 hover:bg-gray-800 transition-all duration-500 rounded-sm p-4 flex flex-col gap-5'>
 
 
-         
-          <Post setForm={setForm} data={data} url={url} form={form} />
+{/*          
+          <Post setForm={setForm} data={data} url={url} form={form} /> */}
 
           {posts.filter(post => Admins.some(archive => archive.id == post.id)).map((post, index) => {
   return (

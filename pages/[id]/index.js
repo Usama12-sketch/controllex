@@ -2,7 +2,10 @@ import Head from 'next/head'
 import { Inter } from '@next/font/google'
 import Profile from '@/components/Profile/Profile'
 import prisma from '@/lib/prisma'
-import ImageUpload from '../../../components/Main/image'
+import SinglePost from '@/components/Get/SinglePost'
+
+import SingleUser from '@/components/Get/SingleUser'
+// import ImageUpload from '../../../components/Main/image'
 
 // import { SafeJson } from './lib/formatHelpers'
 
@@ -21,14 +24,9 @@ export default function Home({post}) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href={post.image} />
       </Head>
-      <main>
-    <div>
-      </div>    
-     
-      
-  
-      <Profile Post={post.Post} data={post}/>
-      {/* <ImageUpload/> */}
+      <main className=' p-2'>
+        {/* <SingleUser user={post.user}/> */}
+  <SinglePost post={post}/>
               </main>
     </>
   )
@@ -38,13 +36,16 @@ export default function Home({post}) {
 export const getServerSideProps = async ({params}) =>{
   
 
-    let  data = await  prisma.user.findUnique({
+    let  data = await  prisma.post.findUnique({
       where:{
         id: params.id
       },
       include:{
-        Post: true,
-        Archives: true
+        user: {
+          include: {
+            Archives: true
+          }
+        }
       }
     })
     

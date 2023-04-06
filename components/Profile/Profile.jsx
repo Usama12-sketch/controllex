@@ -22,7 +22,7 @@ function Profile({Post, data}) {
 <div className=' bg-transparent border-t-4 border-4 border-green-500 shadow-2xl shadow-green-400 rounded-xl animate-spin w-full h-full absolute top-0 left-0'></div>
       <Image width={40} height={40}  src={data.image} alt="" />
       </div>
-      {session.data.user.name === data.name &&
+      {session.data?.user.name === data.name &&
 
 <ol>
 
@@ -41,7 +41,7 @@ function Profile({Post, data}) {
 }
 
 
-               {session.data.user.email === data.email && 
+               {session.data?.user.email === data.email && 
              <UpdateDescription   des={data.description} setProjectState={setProjectState} projectState={projectState}/>
                }
 
@@ -56,7 +56,11 @@ function Profile({Post, data}) {
                     <h1 className=' bg-clip-text bg-gradient-to-br text-3xl font-serif '>{post.title}:</h1>
 
                     <p className=' text-lg '>{post.content}</p>
-                     {session.data.user.email === data.email &&
+                    <img src={post.img} alt="" />
+                  
+                    <Link className=' bg-orange-500 px-1 w-max rounded-sm text-white' href={`/${post.id}`} >Details</Link>
+
+                     {session.data?.user.email === data.email &&
                     <EditPostS posttitle={post.title} img={post.img} id={post.id} content={post.content} archives={data.Archives} user={post.user} />
                      }
 

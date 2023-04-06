@@ -86,7 +86,7 @@ router.replace('/Blog')
               </div>
 
 
-              <Users url={url} users={users} />
+              <Users url={url} setForm={setForm} users={users} />
             </div>
 
           </div>

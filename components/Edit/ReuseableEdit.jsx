@@ -75,6 +75,7 @@ const ReuseableEdit = ({ id,setDisplay,display, url, url2,  setForm, form, user}
         <br />
       </div>
 
+
       <div className={`flex flex-col w-full gap-2 p-2 justify-center items-center   bg-sky-500/70 ${display}`} >
         
         <ol className='flex gap-5'>

@@ -13,9 +13,9 @@ const Admin = ({Admins , url}) => {
 <h1>
   {block.name}</h1>
 
-  <div className=' h-10 overflow-hidden rounded-3xl w-10'>
+  <div className=' my-3 h-10 overflow-hidden rounded-xl w-10'>
 
-<Image width={20} height={20}   src={block.img}
+<Image width={400} height={20}   src={block.img}
  alt="" />
  </div>
   

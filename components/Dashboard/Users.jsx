@@ -3,7 +3,7 @@ import Image from 'next/image'
 const Users = ({users, setForm}) => {
   return (
     <div>
-      <div className=' bg-slate-500 gap-5 p-5 shadow-xl text-yellow-200  flex '>
+      <div className=' bg-slate-500 gap-5 p-5 shadow-xl text-yellow-200  lg:flex lg:flex-row flex-col '>
  <h1 className=' bg-gradient-to-tl text-transparent  bg-clip-text  p-1 font-bold text-3xl'> Users:</h1>
  <div className=' flex flex-wrap'> 
 

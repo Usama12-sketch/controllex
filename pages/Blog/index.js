@@ -22,7 +22,7 @@ const Blog = ({ posts, Admins, Blocks, archives }) => {
 
 
   const [form, setForm] = useState(data)
-
+ const [add, setAdd] = useState("hidden")
   console.log(posts)
   //   const allowedUsers = [
   // { name: "usama jamshaid", emails: "usama@example.com" },
@@ -37,24 +37,31 @@ const Blog = ({ posts, Admins, Blocks, archives }) => {
     <Head>
      <title> Blog</title>
     </Head>
-      <div className='text-black flex flex-col gap-5'>
+      <div className=  ' p-5 text-black bg-gradient-to-br  flex-col gap-5'>
+        <div className='flex  justify-center'> 
 
-        <div className=' shadow-2xl shadow-green-500 bg-gray-500 hover:bg-gray-800 transition-all duration-500 rounded-sm p-4 flex flex-col gap-5'>
+<h1 className='rounded-xl shadow-2xl border-4 border-opacity-30  border-black bg-gradient-to-bl from-green-600 to-green-100 font-serif p-5 text-center text-7xl '>
+        Controllex
+</h1>
+        </div>
+
+<button className=' m-2  bg-purple-300 p-1 rounded-lg font-semibold ' onClick={()=> setAdd(!add)}>{add ? "Add" : "Cancel"} </button>
+
+        <div className={`${add ? "hidden" : "flex"} shadow-2xl shadow-green-500 bg-gray-500 hover:bg-gray-800 transition-all duration-500 rounded-sm p-4  flex-col gap-5`}>
+          <label  className='bg-gray-400 p-2 rounded-lg w-max'>Title:</label>
           <input id='input1' className='transition-all duration-500    hover:rounded-sm' value={form.title} onChange={e => setForm({ ...form, title: e.target.value })}></input>
 
+          <label  className='bg-gray-400 p-2 rounded-lg w-max'>Content :</label>
           <textarea id='input2' className='transition-all duration-500 hover:rounded-sm' cols="30" rows="10" value={form.content} onChange={e => setForm({ ...form, content: e.target.value })}></textarea>
-         
-  
-
+          <label  className='bg-gray-400 p-2 rounded-lg w-max'>Image Url : </label>
           <input className='transition-all duration-500 hover:rounded-sm' id='input3' value={form.img} onChange={e => setForm({ ...form, img: e.target.value })}></input>
           <Post url2={url2} setForm={setForm} data={data} url={url} form={form} />
-          {/* {Blocks.map((block) => <div key={block.id}>{block.emails}</div>)} */}
-          {/* {Admins.map((block) => <div key={block.id}>{block.emails}</div>)} */}
-
-
-<MainPosts url={urlA} posts={posts} Blocks={Blocks} archives={archives}  Admins={Admins}/>
-
         </div>
+         
+<div>
+<MainPosts url={urlA} posts={posts} Blocks={Blocks} archives={archives}  Admins={Admins}/>
+</div>
+
       </div>
 
 

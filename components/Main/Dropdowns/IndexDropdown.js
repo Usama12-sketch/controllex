@@ -12,8 +12,6 @@ const session = useSession(false)
   return (
     <div className="">
       <button
-      
-    
         onClick={(e) => {
           e.preventDefault();
         display === "hidden" ? setDisplay("block") : setDisplay("hidden")

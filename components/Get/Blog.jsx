@@ -6,9 +6,16 @@ import Image from 'next/image';
 import { useSession } from "next-auth/react";
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'; 
+import dynamic from 'next/dynamic'
 
+const Edit = dynamic(()=> import("@/components/Edit/ReuseableEdit"), {
+  loading:()=> <p>editing..</p>
+} )
 
 const BlogPosts = ({ posts, Blocks, archives, Admins, url, url2 }) => {
+
+  const [show, setShow] = useState(false)
+
   const router = useRouter()
   const [archiv, setArchives] = useState({id:"qeqe", })
     const [form, setForm] = useState({ title: '', content: '', img: '', id: "" })
@@ -37,9 +44,9 @@ const BlogPosts = ({ posts, Blocks, archives, Admins, url, url2 }) => {
   return (
     <div>
        
- {posts.filter(post => !archives.some(archive => archive.id === post.id)).map((post, index) => { return <ol className='bg-green-300 to-yellow-200 shadow-2xl flex flex-col gap-3' key={index}>
+ {posts.filter(post => !archives.some(archive => archive.id === post.id)).map((post, index) => { return <ol className='bg-gradient-to-br relative from-green-400 my-4 shadow-2xl flex flex-col gap-3' key={index}>
 
-                <div className='flex flex-col  gap-2 bg-gradient-to-br from-green-400 p-3'>
+                <div className='flex flex-col  gap-2  p-3'>
                 <Link className='flex gap-3' href={`/Blog/${post.user.id}`}>
                 <h1 className=' font-mono w-max p-2 rounded-lg  bg-slate-400 text-center '>{post.user.name}</h1>
                 <Image  width={40} height={40} src=
@@ -47,8 +54,11 @@ const BlogPosts = ({ posts, Blocks, archives, Admins, url, url2 }) => {
                     alt="" />
                 </Link>
             
-                <h1 className=' font-semibold bg-clip-text   bg-gradient-to-br from-white to-yellow-600 text-transparent text-3xl font-serif '>{post.title}:</h1>
+                <h1 className=' font-semibold bg-clip-text   bg-gradient-to-br from-white to-yellow-500 text-transparent text-3xl lg:text-4xl font-serif'>{post.title}:</h1>
                 <p className=' text-lg '>{post.content}</p>
+                <img className=' w-full lg:p-20 ' src={post.img} alt="" />
+<Link className=' absolute lg:text-2xl text-lg font-mono bottom-14 right-5 bg-orange-500 px-1 w-max rounded-lg text-white' href={`/${post.id}`} >Details...</Link>
+
                             </div>
                             
                     {!Blocks.some(p => p.emails === session.data?.user?.email) ? (<div className=' m-4 '>
@@ -67,17 +77,23 @@ onClick={async () => {
   addArchive(archives)
 }}>Archives</button>
 
-              <button className='ml-2 mb-8 bg-gradient-to-b from-blue-300 to-green-500 text-white  rounded  p-2 w-min' onFocusCapture={() => { setForm({ title: post.title, content: post.content, img: post.img }); setDisplay("block") }}>Edit</button>
+              <button className='ml-2 mb-8 bg-gradient-to-b from-blue-300 to-green-500 text-white  rounded  p-2 w-min' onFocusCapture={() => { setForm({ title: post.title, content: post.content, img: post.img }); setDisplay("block");setShow(true) }}>Edit</button>
 
 <div className={`${display} flex flex-col justify-center fixed top-0 h-screen bg-yellow-400 bg-opacity-70  items-center `}>
 
-                            <div className={`  `} >
+                            <div className={` `} >
                                 <input type="text" placeholder='Title' onChange={e => setForm({ ...form, title: e.target.value })} value={form.title} className='w-full m-1 bg-gray-500' />
 
                                 <textarea value={form.content} className={` w-full bg-gray-500`} id="" cols="30" rows="10" onChange={e => setForm({ ...form, content: e.target.value })} ></textarea>
                                 <input value={form.img} onChange={e => setForm({ ...form, img: e.target.value })} className=' w-full bg-green-900 placeholder:text-green-200' type="text" placeholder='type url here' />
-                            <ReuseableEdit url2={url2} url={url} data1={post.title} data3={post.img} id={post.id} datua2={post.content} user={post.user} form={form} setForm={setForm} display={display} setDisplay={setDisplay}>
-                            </ReuseableEdit>
+                            {/* <ReuseableEdit
+                            >
+                          </ReuseableEdit> */}
+                            {show ? <Edit
+                          url2={url2} url={url} data1={post.title} data3={post.img} id={post.id} datua2={post.content} user={post.user} form={form} setForm={setForm} display={display} setDisplay={setDisplay}
+                            
+                            />: <></> }
+
                             </div>
 </div>
                             </>
