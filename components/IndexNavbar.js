@@ -7,6 +7,7 @@ const Navbar = ({}) => {
 
   const [users, setUsers] = useState([]);
   const [posts, setPosts] = useState([]);
+  
   const hideTimeoutRef = useRef(null);
   useEffect(() => {
     async function fetchData() {
@@ -41,7 +42,7 @@ const Navbar = ({}) => {
 <div  onClick={()=> setBlur(true)} onBlur={hidesearch}  className='flex w-max  mx-4   rounded-md  '>
 
 
-    <input className=' rounded-xl lg:w-max md:w-max w-32 px-2 bg-gray-300 font-semibold font-mono' type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder='search' />
+    <input className=' rounded-xl lg:w-max md:w-max w-32 px-2 bg-gray-300 font-semibold font-mono placeholder:text-sm' type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder='search for users, content' />
       
 <div className={`${blur ? "flex": "hidden" } mt-10 flex-col absolute bg-white`}>
 

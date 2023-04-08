@@ -5,7 +5,7 @@
 
 @layer components {
     .animate{
-    @apply  pt-10  ;
+    @apply bg-opacity-50  relative bg-green-400  ;
     }
 
 }

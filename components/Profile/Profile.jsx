@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useQuery } from 'react-query'
 import axios from 'axios'
 import Image from 'next/image'
@@ -9,13 +9,41 @@ import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 
 function Profile({Post, data}) {
+
+
+
+    useEffect(() => {
+        const boxes = document.querySelectorAll('.boxes2');
+    
+        const checkboxes = () => {
+          const triggerbottom = (window.innerHeight / 5) * 4;
+    
+          boxes.forEach((box) => {
+            const boxTop = box.getBoundingClientRect().top;
+            if (boxTop < triggerbottom) {
+             
+              box.classList.add("animate");
+            } else {
+              box.classList.remove("animate");
+            }
+          });
+        };
+    
+        window.addEventListener('scroll', checkboxes);
+        checkboxes();
+    
+        return () => {
+          window.removeEventListener('scroll', checkboxes);
+        };
+      }, []);
+
     const [projectState, setProjectState] = useState('view');
 
     const session = useSession()
     return (
         <div className=' bg-gradient-to-tr from-blue-300 rounded-sm h-full  to-yellow-200 p-7 flex flex-col gap-4'>
         
-            <h1 className=' bg-clip-text bg-gradient-to-b from-blue-700 to-yellow-500 shadow-2xl rounded-lg  font-bold text-transparent text-3xl border-4 p-2 '>Profile of {data.name}</h1> 
+            <h1 className=' bg-clip-text bg-gradient-to-b from-blue-700 to-yellow-500 drop-shadow-xl  rounded-lg  font-bold text-transparent text-3xl lg:text-5xl  p-2 '> {data.name}</h1> 
            
             <div>
         <div className='mb-5 relative rounded-3xl overflow-hidden h-10  w-10 mx-1'>
@@ -47,7 +75,7 @@ function Profile({Post, data}) {
 
                     
             {Post.filter((p) => !data.Archives.some((ar) => ar.id === p.id )).map((post, index) => {
-                    return <ol className=' bg-green-300 to-yellow-200 p-4 shadow-2xl flex flex-col gap-3'  key={index}>
+                    return <ol className=' transition-all boxes2 to-yellow-200 p-4 shadow-2xl flex flex-col gap-3'  key={index}>
                         <h1 className=' font-mono w-max p-2 rounded-lg  bg-slate-400 text-center '>{data.name}</h1>
                     <Image layout='intrinsic' width={40} height={40} src=
                      {data.image}

@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import EditAdmins from '../Edit/EditAdmins'
 const Admin = ({Admins , url}) => {
-      return  Admins.map((block) => <div className=' flex lg:w-max md:w-max w-32  flex-col' key={block.id}>
+      return  Admins.map((block) => <div className=' flex    flex-col' key={block.id}>
     <span className=' text-blue-400 '>
   Email: 
   </span>

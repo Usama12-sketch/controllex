@@ -42,7 +42,7 @@ const post = await fetch (url2, {
 
 })
 console.log (post.json())
-router.replace(router.asPath, undefined, {scroll: true})
+router.replace(router.asPath, {scroll: false})
 
 rest()
 }

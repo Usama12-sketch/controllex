@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import Image from 'next/image'
 const Users = ({users, setForm}) => {
-  return (
-    <div>
-      <div className=' bg-slate-500 gap-5 p-5 shadow-xl text-yellow-200  lg:flex lg:flex-row flex-col '>
- <h1 className=' bg-gradient-to-tl text-transparent  bg-clip-text  p-1 font-bold text-3xl'> Users:</h1>
- <div className=' flex flex-wrap'> 
 
-{users.map((block) => <div className='  flex flex-col'  key={block.id}>
+
+
+  
+  const hidesearch = () => {
+    hideTimeoutRef.current = setTimeout(() => {
+      setDispaly("-ml-80");
+      // setSearch("")
+    }, 400);
+  };
+  const hideTimeoutRef = useRef(null);
+  const [display, setDispaly] = useState("-ml-80")
+  return (<>
+  <button className='m-1 p-1 md:hidden lg:hidden block rounded-md h-max w-max  text-green-300 bg-blue-400 ' 
+  onBlur={hidesearch}
+  onClick={()=> setDispaly("ml-0")}>users</button>
+
+    <div className={`${display} lg:ml-0 md:ml-0 lg:relative md:relative  absolute  -left-0 lg:top-0 md:top-0  top-10`}>
+      <div className=' bg-slate-500  p-5 shadow-xl text-yellow-200  lg:flex lg:flex-row  flex-col '>
+ <h1 className=' bg-gradient-to-tl text-transparent  bg-clip-text  p-1 font-bold text-3xl'> Users:</h1>
+ <div className=' flex flex-nowrap flex-col lg:flex-row  lg:flex-wrap'> 
+
+{users.map((block) => <div className=' m-1 shadow-xl  flex flex-col'  key={block.id}>
   <span className=' text-blue-400 '>
   Email: 
   </span>
@@ -26,6 +42,7 @@ const Users = ({users, setForm}) => {
  </div>
  </div>
     </div>
+  </>
   )
 }
 
