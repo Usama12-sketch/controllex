@@ -40,7 +40,7 @@ const Blog = ({ posts, Admins, Blocks, archives }) => {
       <div className=  ' p-5 text-black bg-gradient-to-br  flex-col gap-5'>
         <div className='flex  justify-center'> 
 
-<h1 className='rounded-xl shadow-2xl border-4 border-opacity-30  border-black bg-gradient-to-bl from-green-600 to-green-100 font-serif p-5 text-center text-7xl '>
+<h1 className='rounded-xl drop-shadow-lg bg-gradient-to-bl from-green-600 to-green-100 font-serif p-5 text-center md:text-4xl text-3xl lg:text-7xl '>
         Controllex
 </h1>
         </div>

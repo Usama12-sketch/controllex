@@ -13,7 +13,7 @@ export default function ImageUpload() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Perform any necessary actions with the selected image here, such as uploading it to a server.
-    console.log(image);
+    // console.log(image);
   };
 
   return (

@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+    .animate{
+    @apply  pt-10  ;
+    }
+
+}

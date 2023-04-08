@@ -2,7 +2,6 @@ import Link from 'next/link'
 import React, { useState , useRef,useEffect} from 'react'
 import { useSession } from 'next-auth/react'
 import IndexDropDown from './Main/Dropdowns/IndexDropdown'
-import Image from 'next/image'
 const Navbar = ({}) => {
 
 
@@ -30,18 +29,19 @@ const Navbar = ({}) => {
     }, 500);
   };
   const [search , setSearch] = useState("")
+
   const [blur , setBlur] = useState(false)
 
   return (
   
-  <div  className='duration-500 hover:py-2 fixed bg-black bg-opacity-50 z-30   flex w-screen items-center justify-between'>
+  <div  className='duration-500 hover:py-2 fixed bg-black bg-opacity-50 z-30 lg:h-max md:h-max h-10  flex w-screen items-center justify-between'>
   
-      <Link className=' m-1 p-1 rounded-lg text-shadow-xl text-lg hover:text-green-500 duration-300  bg-gradient-to-br ease-in-out text-blue-300 font-bold font-sans ' href={'/Blog'}>Controllex</Link>
+      <Link className=' m-1 p-1 rounded-lg shadow-2xl shadow-red-500 lg:text-lg md:text-lg text-sm  hover:text-green-500 duration-300  bg-gradient-to-br ease-in-out text-blue-300 font-bold font-sans ' href={'/Blog'}>Controllex</Link>
 
 <div  onClick={()=> setBlur(true)} onBlur={hidesearch}  className='flex w-max  mx-4   rounded-md  '>
 
 
-    <input className=' rounded-xl px-2 bg-gray-300 font-semibold font-mono' type="text" value={search} onChange={(e) => setSearch(e.target.value)} />
+    <input className=' rounded-xl lg:w-max md:w-max w-32 px-2 bg-gray-300 font-semibold font-mono' type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder='search' />
       
 <div className={`${blur ? "flex": "hidden" } mt-10 flex-col absolute bg-white`}>
 
@@ -62,6 +62,23 @@ const Navbar = ({}) => {
       </Link>
         </button> 
         </ol>)}
+
+        {search.length > 0 && posts.filter(post => post.content.toLowerCase().includes(search.toLowerCase())).map((post) => {
+    let words = post.content.split(' ');
+    let index = words.findIndex(word => word.toLowerCase().includes(search.toLowerCase()));
+    let slicedWords = words.slice(Math.max(0, index - 2), index + 3);
+    let slicedContent = slicedWords.join(' ');
+    return (
+        <ol className=' bg-blue-300 p-1 m-3 flex flex-col' key={post.id}>
+            <h2 className='font-bold text-lg'>{post.title.split(" ").slice(0 , 3).join(" ") }</h2>
+            <button onClick={()=> setSearch("")}>
+                <Link href={`/${post.id}`}>{slicedContent}</Link>
+            </button> 
+        </ol>
+    );
+})}
+
+
 </div>
 </div>
     <div className='w-max relative top-0 h-min right-0'> 

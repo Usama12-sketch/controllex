@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import Image from 'next/image';
 import { useSession } from "next-auth/react";
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'; 
 import dynamic from 'next/dynamic'
 
@@ -13,6 +13,32 @@ const Edit = dynamic(()=> import("@/components/Edit/ReuseableEdit"), {
 } )
 
 const BlogPosts = ({ posts, Blocks, archives, Admins, url, url2 }) => {
+
+
+  useEffect(() => {
+    const boxes = document.querySelectorAll('.boxes2');
+
+    const checkboxes = () => {
+      const triggerbottom = (window.innerHeight / 5) * 2;
+
+      boxes.forEach((box) => {
+        const boxTop = box.getBoundingClientRect().top;
+        if (boxTop < triggerbottom) {
+         
+          box.classList.add("animate");
+        } else {
+          box.classList.remove("animate");
+        }
+      });
+    };
+
+    window.addEventListener('scroll', checkboxes);
+    checkboxes();
+
+    return () => {
+      window.removeEventListener('scroll', checkboxes);
+    };
+  }, []);
 
   const [show, setShow] = useState(false)
 
@@ -42,11 +68,11 @@ const BlogPosts = ({ posts, Blocks, archives, Admins, url, url2 }) => {
     }
     
   return (
-    <div>
+    <div className='boxes2  transition-all duration-700'>
        
- {posts.filter(post => !archives.some(archive => archive.id === post.id)).map((post, index) => { return <ol className='bg-gradient-to-br relative from-green-400 my-4 shadow-2xl flex flex-col gap-3' key={index}>
+ {posts.filter(post => !archives.some(archive => archive.id === post.id)).map((post, index) => { return <ol className='bg-gradient-to-br  relative from-green-400 my-4 shadow-2xl flex flex-col gap-3' key={index}>
 
-                <div className='flex flex-col  gap-2  p-3'>
+                <div className='flex flex-col duration-500 boxes2 gap-2  p-3'>
                 <Link className='flex gap-3' href={`/Blog/${post.user.id}`}>
                 <h1 className=' font-mono w-max p-2 rounded-lg  bg-slate-400 text-center '>{post.user.name}</h1>
                 <Image  width={40} height={40} src=
@@ -55,7 +81,7 @@ const BlogPosts = ({ posts, Blocks, archives, Admins, url, url2 }) => {
                 </Link>
             
                 <h1 className=' font-semibold bg-clip-text   bg-gradient-to-br from-white to-yellow-500 text-transparent text-3xl lg:text-4xl font-serif'>{post.title}:</h1>
-                <p className=' text-lg '>{post.content}</p>
+                <p className=' text-lg '>{post.content.split(' ').slice(0, 5).join(' ')}.....</p>
                 <img className=' w-full lg:p-20 ' src={post.img} alt="" />
 <Link className=' absolute lg:text-2xl text-lg font-mono bottom-14 right-5 bg-orange-500 px-1 w-max rounded-lg text-white' href={`/${post.id}`} >Details...</Link>
 
