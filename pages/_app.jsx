@@ -8,7 +8,7 @@ export default function App({ Component, pageProps, }) {
     
     <Navbar  />
     
-<div className='pt-12'>
+<div className='lg:pt-12 pt-12  '>
    <Component {...pageProps} ></Component>
 </div>
   

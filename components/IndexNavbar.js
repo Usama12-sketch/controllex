@@ -34,7 +34,7 @@ const Navbar = ({}) => {
 
   return (
   
-  <div  className='duration-500 hover:py-2 fixed bg-black bg-opacity-50 z-30 lg:h-max md:h-max h-10  flex w-screen items-center justify-between'>
+  <div  className='duration-500  hover:py-2 fixed bg-black bg-opacity-50 z-50 h-max  sm:h-auto  flex w-screen items-center justify-between'>
   
       <Link className=' m-1 p-1 rounded-lg shadow-2xl shadow-red-500 lg:text-lg md:text-lg text-sm  hover:text-green-500 duration-300  bg-gradient-to-br ease-in-out text-blue-300 font-bold font-sans ' href={'/Blog'}>Controllex</Link>
 

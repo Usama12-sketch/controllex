@@ -76,7 +76,7 @@ const Blog = ({ posts, Admins, Blocks, archives }) => {
 
 export default Blog
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
 
   let posts = await prisma.post.findMany({
     include: {
