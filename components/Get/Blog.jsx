@@ -1,12 +1,15 @@
 
 import ReuseableEdit from '@/components/Edit/ReuseableEdit';
 import Link from 'next/link';
-
+import QueryComments from '../Comments/QueryComments'
 import Image from 'next/image';
 import { useSession } from "next-auth/react";
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'; 
 import dynamic from 'next/dynamic'
+import NewComment from '../Comments/NewComment';
+import QueryWrapper from '../Comments/QueryWrapper';
+import Comments from '../Comments/Comments';
 
 const Edit = dynamic(()=> import("@/components/Edit/ReuseableEdit"), {
   loading:()=> <p>editing..</p>
@@ -82,10 +85,23 @@ const BlogPosts = ({ posts, Blocks, archives, Admins, url, url2 }) => {
             
                 <h1 className=' font-semibold bg-clip-text   bg-gradient-to-br from-white to-yellow-500 text-transparent text-3xl lg:text-4xl font-serif'>{post.title}:</h1>
                 <p className=' text-lg '>{post.content.split(' ').slice(0, 5).join(' ')}.....</p>
+
                 <img className=' w-full lg:p-20 ' src={post.img} alt="" />
                 <div className=' flex  justify-end'>
-<Link className=' lg:text-2xl text-lg font-mono bottom-14 right-5 bg-orange-500 px-1 w-max rounded-lg text-white' href={`/${post.id}`} >Details...</Link>
-                </div>
+
+
+<Link className=' lg:text-xl text-md font-mono bottom-14 right-5 bg-orange-200 px-1 w-max rounded-lg text-gray-800' href={`/${post.id}`} >Details...</Link>
+
+ </div>
+
+ <div className=''>
+<NewComment postid={post.id} />
+<Comments post={post}/>
+
+{/* <QueryComments postid={post.id}/> */}
+
+
+</div>
 
                             </div>
                             

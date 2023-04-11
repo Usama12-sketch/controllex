@@ -8,7 +8,7 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 
 
-const Post = ({form, url, url2, data ,setForm}) => {
+const CreateComments = ({form,name, setShow, url, url2, data ,setForm}) => {
 
   const session = useSession(false)
   const router = useRouter()
@@ -25,6 +25,7 @@ const post = await fetch (url, {
 })
 console.log (post.json())
 router.replace(router.asPath, undefined, {scroll: false})
+setShow(false)
 
 rest()
 }
@@ -43,7 +44,6 @@ const post = await fetch (url2, {
 })
 console.log (post.json())
 router.replace(router.asPath, {scroll: false})
-
 rest()
 }
 
@@ -60,11 +60,9 @@ const path = router.pathname
 
 <div className=' flex gap-2 justify-around'> 
 
-<button className=' text-orange-200 bg-gradient-to-tr  shadow-lg  w-max p-1  font-bold' onClick={()=>{posts(form); }}>Post</button>
+<button className=' text-orange-200 bg-gradient-to-tr  shadow-lg  w-max p-1  font-bold' onClick={()=>{posts(form); }}>{name}</button>
 
-{path === '/Blog' &&  
-<button className=' shadow-md rounded bg-blue-600   text-green-200 font-semibold shadow-green-600 lg:w-20 md:w-20 w-10' onClick={()=>{Draft(form); }}>Draft</button>
-}
+
 </div>
       
       </div>
@@ -72,4 +70,4 @@ const path = router.pathname
   )
 }
 
-export default Post
+export default CreateComments

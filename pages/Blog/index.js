@@ -10,7 +10,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 
 
-const Blog = ({ posts, Admins, Blocks, archives }) => {
+const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
   const session = useSession(false)
 
   // const allowedUsers = ["usama jamshaid", "John Doe", "Jane Smith"];
@@ -23,15 +23,15 @@ const Blog = ({ posts, Admins, Blocks, archives }) => {
 
   const [form, setForm] = useState(data)
  const [add, setAdd] = useState("hidden")
-  console.log(posts)
+  // console.log(posts)
   //   const allowedUsers = [
   // { name: "usama jamshaid", emails: "usama@example.com" },
   // { name: "John Doe", emails: "john@example.com" },
   // { name: "Jane Smith", emails: "jane@example.com" }
   // ];
   const urlA = "/api/CUD/Blog"
-  console.log(Blocks)
-  console.log(Admins)
+  console.log(comments)
+  // console.log(Admins)
   return (
     <>
     <Head>
@@ -59,6 +59,7 @@ const Blog = ({ posts, Admins, Blocks, archives }) => {
         </div>
          
 <div>
+
 <MainPosts url={urlA} posts={posts} Blocks={Blocks} archives={archives}  Admins={Admins}/>
 </div>
 
@@ -80,18 +81,25 @@ export const getServerSideProps = async () => {
 
   let posts = await prisma.post.findMany({
     include: {
-      user: true
+      user: true,
+      Comments: {
+        include:{
+          user: true
+        }
+      }
     }
   });
   let archives = await prisma.archives.findMany()
+  
   let Admins = await prisma.admins.findMany()
   let Blocks = await prisma.blocs.findMany()
   Admins = SafeJson(Admins);
   Blocks = SafeJson(Blocks);
   posts = SafeJson(posts)
+  
    archives = SafeJson(archives)
-  console.log(archives)
+  // console.log(archives)
   return {
-    props: { posts, Admins, Blocks, archives },
+    props: { posts,  Admins, Blocks, archives },
   };
 };

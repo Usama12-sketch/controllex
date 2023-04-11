@@ -42,12 +42,6 @@ router.replace('/Blog')
    return (
      <div className='bg-gray-600 p-2 hover:bg-gray-800 to-pink-700   '>
 
-     <div className=' p-3 bg-slate-100'>
-      <Link className='  bg-gradient-to-br from-orange-400  font-bold p-2 rounded-sm m-3' href='/Dashboard/'>Admins</Link>
-      <Link className='  bg-gradient-to-br from-red-400 text--300 font-bold p-2 rounded-sm m-3' href='/Dashboard/Blocks'>Blocks</Link>
-     </div>
-
-
 
       
       {Admins.some((p) => p.emails === session.data?.user?.email) || session.data?.user?.email === "chodarykhan115@gmail.com" ? (<div className='  text-red-500'>
