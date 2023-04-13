@@ -21,11 +21,11 @@ export default async function handler(req, res) {
 
   if (req.method === 'PUT') {
     const projectId = req.query.id 
-    const { comment} = req.body;
+    const { comment, } = req.body;
     console.log({ comment });
     const result = await prisma.comments.update({
       where: { id: projectId },
-      data: { comment },
+      data: { comment, },
     })
     res.json(result);
   }

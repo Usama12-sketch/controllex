@@ -44,10 +44,10 @@ const Navbar = ({}) => {
 
     <input className=' rounded-xl lg:w-max md:w-max w-32 px-2 bg-gray-300 font-semibold font-mono placeholder:text-sm' type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder='search for users, content' />
       
-<div className={`${blur ? "flex": "hidden" } mt-10 flex-col absolute bg-white`}>
+<div className={`${blur ? "flex": "hidden" } mt-10 flex-col w-max absolute bg-white`}>
 
       {search.length > 0 && users.filter(user => user.name.toLowerCase().includes(search.toLowerCase())).map((user) =>
-       <ol className='  bg-slate-200 m-3 flex flex-col' key={user.id}>
+       <ol className='  bg-slate-200 my-3 flex flex-col' key={user.id}>
        <button onClick={()=> setSearch("")}>
         <Link href=
       {`/Blog/${user.id}`}>{user.name}

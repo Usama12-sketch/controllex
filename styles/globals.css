@@ -4,10 +4,21 @@
 
 
 @layer components {
-    .animate{
-    @apply bg-opacity-50  relative bg-green-400  ;
-    }
-
+  .animate{
+    @apply bg-opacity-50  relative  bg-transparent shadow-2xl shadow-blue-400 border-b-8 rounded-2xl ;
+  }
+  .scrolle{
+    
+    scrollbar-face-color: #ce6060;
+    scrollbar-color: red;
+    
+  }
+  .main{
+   text-shadow: #c44545;
+   text-shadow: 2rem;
+   background-color: #c44545;
+  }
+ 
 }
 
 @keyframes pulse {
@@ -55,3 +66,27 @@
   .element {
     animation: pulses 2s ease-in-out infinite;
   }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    box-shadow: #1fb924;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgb(35, 190, 225);
+ transition: all 2s ease-in-out;
+ box-shadow: #1fb924;
+ border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:focus-visible {
+  background-color: rgb(227, 111, 111);
+  
+  transition: all 2s ease-in-out;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: rgb(14, 2, 2);
+    border-radius: 4px;
+  }
+  

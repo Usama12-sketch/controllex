@@ -15,7 +15,9 @@ const MainPosts = ({ posts, Blocks, archives, Admins, url, url2  }) => {
 
 
             {path !== "/Draft" ? <div>
+
                 <BlogPosts posts={posts} archives={archives} Blocks={Blocks} Admins={Admins} url={url} url2={url2}/>
+                
                        </div> : null}
         </div>
     )

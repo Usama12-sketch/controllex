@@ -7,7 +7,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
 
-      <body className=' bg-gradient-to-bl from-green-600 to-blue-500 bg-no-repeat h-screen'>
+      <body className=' bg-gradient-to-bl from-gray-800  to-blue-500 bg-no-repeat h-screen'>
               
         <Main />
         <NextScript />

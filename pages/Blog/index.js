@@ -13,22 +13,20 @@ import Image from 'next/image';
 const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
   const session = useSession(false)
 
-  // const allowedUsers = ["usama jamshaid", "John Doe", "Jane Smith"];
+
 
 
   const url = `/api/CUD/Blog`
   const url2 = `/api/CUD/Draft`
-  const data = { title: '', content: '', img: '', }
+  const data = { title: '', content: '', img: ''}
+  const publish = {published: true}
+
 
 
   const [form, setForm] = useState(data)
  const [add, setAdd] = useState("hidden")
-  // console.log(posts)
-  //   const allowedUsers = [
-  // { name: "usama jamshaid", emails: "usama@example.com" },
-  // { name: "John Doe", emails: "john@example.com" },
-  // { name: "Jane Smith", emails: "jane@example.com" }
-  // ];
+ 
+  
   const urlA = "/api/CUD/Blog"
   console.log(comments)
   // console.log(Admins)
@@ -40,7 +38,7 @@ const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
       <div className=  ' p-5 text-black bg-gradient-to-br  flex-col gap-5'>
         <div className='flex  justify-center'> 
 
-<h1 className='rounded-xl drop-shadow-lg bg-gradient-to-bl from-green-600 to-green-100 font-serif p-5 text-center md:text-4xl text-3xl lg:text-7xl '>
+<h1 className='rounded-xl drop-shadow-lg bg-gradient-to-bl from-green-600 to-green-100 font-serif p-5 text-center md:text-4xl text-3xl lg:text-7xl main'>
         Controllex
 </h1>
         </div>
@@ -55,7 +53,7 @@ const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
           <textarea id='input2' className='transition-all duration-500 hover:rounded-sm' cols="30" rows="10" value={form.content} onChange={e => setForm({ ...form, content: e.target.value })}></textarea>
           <label  className='bg-gray-400 p-2 rounded-lg w-max'>Image Url : </label>
           <input className='transition-all duration-500 hover:rounded-sm' id='input3' value={form.img} onChange={e => setForm({ ...form, img: e.target.value })}></input>
-          <Post url2={url2} setForm={setForm} data={data} url={url} form={form} />
+          <Post  input1={form.title} setForm={setForm} data={data} publish={publish} url={url} form={form} />
         </div>
          
 <div>
@@ -80,6 +78,16 @@ export default Blog
 export const getServerSideProps = async () => {
 
   let posts = await prisma.post.findMany({
+    
+    where:{
+      published: true,
+      
+     
+        
+      
+    
+    },
+
     include: {
       user: true,
       Comments: {

@@ -67,7 +67,7 @@ const Blog = ({ Admins, users }) => {
             </span>
 
             <input className='transition-all duration-500 hover:rounded-sm' id='input3' value={form.img} onChange={e => setForm({ ...form, img: e.target.value })}></input>
-            <Post setForm={setForm} data={data} url={url} form={form} />
+            <Post setForm={setForm} input1={form.emails} data={data} url={url} form={form} />
 
 
             <div className='  bg-gradient-to-br from-yellow-500 to-pink-700  flex '>

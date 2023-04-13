@@ -1,69 +1,63 @@
 "use client"
 import React from 'react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 // import { useRouter } from 'next/navigation'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 
 
-const CreateComments = ({form,name, setShow, url, url2, data ,setForm}) => {
+const CreateComments = ({form,name,input1, setShow, url, url2, data ,setForm}) => {
+  const hideTimeoutRef = useRef(null);
+
+  const hidesearch = () => {
+    hideTimeoutRef.current = setTimeout(() => {
+      setShow(false);
+      // setSearch("")
+    }, 2000);
+  };
 
   const session = useSession(false)
   const router = useRouter()
-
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     async function posts(data) {
-const post = await fetch (url, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-    'Content-type': 'application/json',
-  },
+      if(input1.length > 0) {
+setIsButtonDisabled(true)
+        const post = await fetch (url, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-type': 'application/json',
+          },
+          
+        })
+      }
 
-})
-console.log (post.json())
 router.replace(router.asPath, undefined, {scroll: false})
-setShow(false)
-
+hidesearch()
+// setShow(false)
 rest()
 }
 
 function rest () {
   setForm(data)
+  setIsButtonDisabled(false)
    }
-    async function Draft(data) {
-const post = await fetch (url2, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-    'Content-type': 'application/json',
-  },
 
-})
-console.log (post.json())
-router.replace(router.asPath, {scroll: false})
-rest()
-}
-
-function rest () {
-  setForm(data)
-   }
 const path = router.pathname
 
   return (
     <div className='text-black flex  gap-5' >
 
      
-      <div className=' shadow-2xl bg-gray-500 hover:bg-gray-800 transition-all duration-500 rounded-sm p-4 flex flex-col gap-5'>
 
-<div className=' flex gap-2 justify-around'> 
+<div className=' flex gap-2 p-1 justify-around'> 
 
-<button className=' text-orange-200 bg-gradient-to-tr  shadow-lg  w-max p-1  font-bold' onClick={()=>{posts(form); }}>{name}</button>
+<button className=' text-orange-200 duration-300  rounded-sm  from-green-400 bg-gradient-to-tr  shadow-lg hover:rounded-xl  w-max p-1  font-bold' disabled={isButtonDisabled} onClick={()=>{posts(form); }}>{name}</button>
 
 
-</div>
       
       </div>
     </div>

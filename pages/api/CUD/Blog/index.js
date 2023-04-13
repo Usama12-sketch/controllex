@@ -18,13 +18,13 @@ export default async function handler(req, res) {
   console.log(PrismaUser.id)
 
 
-  const { title, content, img } = req.body;
+  const { title, content, img,published } = req.body;
   const result = await prisma.post.create({
 
     data: {
       title,
       content,
-      img,
+      img,published,
       userId: PrismaUser.id
 
     },

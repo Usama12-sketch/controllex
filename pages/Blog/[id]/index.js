@@ -38,7 +38,18 @@ export async function getStaticProps({ params }) {
       id :params.id,
     },
     include: {
-      Post: true,
+      Post: {
+        where:{
+          published:true,
+                    },
+        include:{
+          Comments:{
+            include:{
+              user:true
+            }
+          }
+        }
+      },
       Archives: true,
     },
   });

@@ -1,16 +1,21 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import { useQuery } from 'react-query'
-import axios from 'axios'
 import Image from 'next/image'
 import EditPostS from '../Edit/Edit'
 import UpdateDescription from './Description'
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Comments from '@/components/Comments/Comments'
+import NewComment from '@/components/Comments/NewComment'
+import MainEdit from '@/components/Edit/MainEdit';
 
 function Profile({Post, data}) {
 
-
+const router = useRouter()
+           
+const url = "/api/CUD/Blog"
+const url2 = "/api/CUD/Blog"
 
     useEffect(() => {
         const boxes = document.querySelectorAll('.boxes2');
@@ -41,7 +46,9 @@ function Profile({Post, data}) {
 
     const session = useSession()
     return (
-        <div className=' bg-gradient-to-tr from-blue-300 rounded-sm h-full  to-yellow-200 p-7 flex flex-col gap-4'>
+      <div className=' bg-gradient-to-tr from-blue-300 rounded-sm h-full  to-yellow-200 p-7 flex flex-col gap-4'>
+         {router.pathname !== "/Draft" &&
+          <div>
         
             <h1 className=' bg-clip-text bg-gradient-to-b from-blue-700 to-yellow-500 drop-shadow-xl  rounded-lg  font-bold text-transparent text-3xl lg:text-5xl  p-2 '> {data.name}</h1> 
            
@@ -73,7 +80,9 @@ function Profile({Post, data}) {
              <UpdateDescription   des={data.description} setProjectState={setProjectState} projectState={projectState}/>
                }
 
+</div>
                     
+                  }
             {Post.filter((p) => !data.Archives.some((ar) => ar.id === p.id )).map((post, index) => {
                     return <ol className=' transition-all boxes2 to-yellow-200 p-4 shadow-2xl flex flex-col gap-3'  key={index}>
                         <h1 className=' font-mono w-max p-2 rounded-lg  bg-slate-400 text-center '>{data.name}</h1>
@@ -89,9 +98,14 @@ function Profile({Post, data}) {
                     <Link className=' bg-orange-500 px-1 w-max rounded-sm text-white' href={`/${post.id}`} >Details</Link>
 
                      {session.data?.user.email === data.email &&
-                    <EditPostS posttitle={post.title} img={post.img} id={post.id} content={post.content} archives={data.Archives} user={post.user} />
-                     }
+                                      <MainEdit url={url} url2={url2} post={post}/>
 
+                   }
+        <div>
+<button className='bg-white text-green-400 font-black font-serif border-b-4 border-green-300 duration-300 hover:border-green-400 px-1 my-1 rounded-md'>Comments:</button>
+</div>
+        <NewComment postid={post.id}  />
+<Comments post={post} />
                 
                     </ol>
                 })

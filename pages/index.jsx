@@ -50,7 +50,20 @@ export const getServerSideProps = async ({req}) =>{
         email: session.user.email
       },
       include:{
-        Post: true,
+        Post:{
+          where:{
+published:true,
+          },
+
+  include:{
+
+    Comments:{
+      include:{
+        user:true
+      }
+    }
+          },
+        },
         Archives: true
       }
     })

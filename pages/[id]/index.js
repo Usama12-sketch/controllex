@@ -38,17 +38,27 @@ export const getServerSideProps = async ({params}) =>{
 
     let  data = await  prisma.post.findUnique({
       where:{
-        id: params.id
+    
+        id: params.id,
       },
       include:{
         user: {
           include: {
             Archives: true
           }
-        }
-      }
+        },
+        
+       Comments:{
+                include:{
+                  user:true
+                }
+              },
+           
+          Archives: true,
+        },
+      
     })
-    
+ 
     
     const serializedData = JSON.stringify(data);
     const safeData = JSON.parse(serializedData);   

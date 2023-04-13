@@ -12,7 +12,7 @@ const [dashboard, setDashboard] = useState(false)
 <> {
         path.includes('/Dashboard') ?
 
-      <div className='ml-0   md:w-40  lg:w-60 flex gap-3 relative  bg-slate-500 hover:bg-gray-600 z-40'>
+      <div className='ml-0   md:w-40  lg:w-60 flex gap-3 relative   duration-500 bg-slate-500 hover:bg-gray-600 z-40'>
         
         <button className=' text-gray-200 rounded-xl bg-red-400 p-2 text-center m-2  md:hidden lg:hidden block hover:bg-red-500  ' 
         onBlur={()=> setDashboard(false)} 

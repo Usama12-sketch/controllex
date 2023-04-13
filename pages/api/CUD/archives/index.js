@@ -18,11 +18,12 @@ export default async function handler(req, res) {
   console.log(PrismaUser.id)
 
 
-  const { id } = req.body;
+  const { id, postId } = req.body;
   const result = await prisma.archives.create({
 
     data: {
       id,
+      postId,
       
    
       userId: PrismaUser.id
