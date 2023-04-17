@@ -1,3 +1,4 @@
+
 import prisma from '@/pages/../lib/prisma';
 
 import { authOptions } from '../../auth/[...nextauth]';
@@ -20,18 +21,18 @@ export default async function handler(req, res) {
 
   if (req.method === 'PUT') {
     const projectId = req.query.id 
-    const { title, content, img } = req.body;
-    console.log({ title });
-    const result = await prisma.draft.update({
+    const { heart, } = req.body;
+    console.log({ heart });
+    const result = await prisma.hearts.update({
       where: { id: projectId },
-      data: { title , content, img },
+      data: { heart, },
     })
     res.json(result);
   }
 
   if (req.method === 'DELETE') {
     const projectId = req.query.id ;
-    const result = await prisma.draft.delete({
+    const result = await prisma.hearts.delete({
       where: { id: projectId }
     });
     res.json(result);

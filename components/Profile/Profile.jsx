@@ -1,7 +1,7 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
-import EditPostS from '../Edit/Edit'
+import Likes from '@/components/Comments/Likes'
 import UpdateDescription from './Description'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
@@ -11,6 +11,13 @@ import NewComment from '@/components/Comments/NewComment'
 import MainEdit from '@/components/Edit/MainEdit';
 
 function Profile({Post, data}) {
+
+  const [show, setShow] = useState(null)
+  function hideShow(id) {
+    if (id)  {
+      setShow(id);
+    }
+  }
 
 const router = useRouter()
            
@@ -101,11 +108,36 @@ const url2 = "/api/CUD/Blog"
                                       <MainEdit url={url} url2={url2} post={post}/>
 
                    }
-        <div>
-<button className='bg-white text-green-400 font-black font-serif border-b-4 border-green-300 duration-300 hover:border-green-400 px-1 my-1 rounded-md'>Comments:</button>
-</div>
-        <NewComment postid={post.id}  />
-<Comments post={post} />
+       <div className=' flex flex-col w-full  '>
+              <div className='flex   items-center gap-3 '>
+              <Likes post={post}/>
+                  
+
+                <button className='bg-white w-max text-green-400 font-black font-serif border-b-4 border-green-300 duration-300 hover:border-green-400 px-1 my-1 rounded-md' onClick={() => hideShow(post.id)}> Comments: </button>
+              </div>
+<div className= " flex ">
+
+              {post.hearts.map((h) => (
+                <ol className="flex " key={h.id}>
+
+    <Link href={`/Blog/${h.user.id}`}>
+<div className=' my-2 flex bg-yellow-300 rounded-2xl duration-500 w-max '>
+           <div className=' w-7 h-7  rounded-2xl  overflow-hidden'> 
+
+           <Image width={50} height={10} src={h.user.image} alt="" />
+        </div>
+        </div>
+           </Link>
+
+        </ol>
+      ))}
+      </div>
+
+             { show === post.id && <Comments post={post} >
+              </Comments>}
+              
+            </div>
+
                 
                     </ol>
                 })

@@ -58,9 +58,6 @@ const EditBlocs = ({ id, emailsform, name, img , user}) => {
 
       <div className={`flex flex-col w-full gap-2 p-2 justify-center items-center fixed top-0 h-screen bg-sky-500/70 ${display}`} >
 
-        {/* 
-        Update here  ..........
-        */}
         <input type="text" placeholder='Title' onChange={e => setForm({...form, emails: e.target.value})} value={form.emails} className='name-full bg-gray-500' />
 
         <textarea value={form.name} className={` w-full bg-gray-500`} id="" cols="30" rows="10" onChange={e => setForm({...form, name: e.target.value})} ></textarea>

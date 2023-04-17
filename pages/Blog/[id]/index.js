@@ -47,7 +47,13 @@ export async function getStaticProps({ params }) {
             include:{
               user:true
             }
+          },
+          hearts: {
+            include:{
+              user: true
+            }
           }
+    
         }
       },
       Archives: true,

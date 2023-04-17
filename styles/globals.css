@@ -5,7 +5,30 @@
 
 @layer components {
   .animate{
-    @apply bg-opacity-50  relative  bg-transparent shadow-2xl shadow-blue-400 border-b-8 rounded-2xl ;
+    @apply bg-opacity-50  relative  bg-transparent shadow-2xl shadow-blue-400 border-l-8 px-20 border-t-8 ease-in rounded-2xl ;
+    box-shadow: #0aabf6 21px 10px 21px 1px;
+    transition: all 1s ease-in-out;
+    
+  }
+  .shadow-b {
+  color: #08f0a393;
+   text-shadow: #0c44d1cb -3px 3px 1px ;
+   transition: all 1s ease-in-out;
+  
+   box-shadow: #0aabf6 10px 10px 21px 1px;
+  }
+  .shadow-b:hover {
+    text-shadow: #159cc9 -3px 3px 1px ;
+  }
+  .home {
+   text-shadow: #0c44d1cb -3px 3px 1px ;
+   transition: all 1s ease-in-out;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+   box-shadow: #0aabf6 2px 2px 5px 1px;
+  }
+  .home:hover {
+    color: #0aabf6;
   }
   .scrolle{
     

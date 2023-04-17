@@ -9,7 +9,7 @@ import Image from 'next/image'
 import {deleteItem , CreateItem} from '@/lib/function'
 
 
-const Post = ({form, url,input1, publish, data ,setForm}) => {
+const Post = ({form, url,input1, publish, data ,setForm ,tag}) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const session = useSession(false)
   const router = useRouter()
@@ -70,7 +70,7 @@ function rest () {
 <div className=' flex gap-2 justify-around'> 
 
 <button className=' text-orange-200 bg-gradient-to-tr  shadow-lg  w-max p-1  font-bold'  disabled={isButtonDisabled} onClick={()=>{ if(input1.length> 0) {         setIsButtonDisabled(true);
- CreateItem(url, {...form,  ...publish }, reset)} }}>Post</button>
+ CreateItem(url, {...form,  ...publish }, reset ,setIsButtonDisabled)} }}>{tag}</button>
 
 {path === '/Blog' &&
 <button className=' shadow-md rounded bg-blue-600   text-green-200 font-semibold shadow-green-600 lg:w-20 md:w-20 w-10' disabled={isButtonDisabled}  onClick={()=>{Draft(form); }}>Draft</button>

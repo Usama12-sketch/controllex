@@ -16,21 +16,10 @@ model Post {
   img       String?
   published Boolean    @default(false)
   userId    String?
+  hearts    Hearts[]
   Archives  Archives[]
   Comments  Comments[]
   user      User?      @relation(fields: [userId], references: [id])
-}
-
-model Draft {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  content   String?
-  img       String?
-  published Boolean  @default(false)
-  userId    String?
-  user      User?    @relation(fields: [userId], references: [id])
 }
 
 model Admins {
@@ -64,6 +53,17 @@ model Comments {
   published Boolean  @default(false)
   userId    String?
   comment   String?
+  postId    String?
+  Post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User?    @relation(fields: [userId], references: [id])
+}
+model Hearts {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userId    String?
+  heart Boolean  @default(false)
   postId    String?
   Post      Post?    @relation(fields: [postId], references: [id], onDelete: Cascade)
   user      User?    @relation(fields: [userId], references: [id])
@@ -107,7 +107,8 @@ model User {
   Archives      Archives[]
   Blocs         Blocs[]
   comments      Comments[]
-  draft         Draft[]
+  hearts         Hearts[]
+
   Post          Post[]
   sessions      Session[]
 }

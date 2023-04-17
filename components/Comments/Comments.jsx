@@ -3,6 +3,7 @@ import {useSession} from 'next-auth/react'
 import {useRouter} from 'next/router'
 import Image from 'next/image'
 import {deleteItem , UpdateItem} from '@/lib/function'
+import NewComment from './NewComment'
 const Comments = ({post}) => {
   const [editableCommentId, setEditableCommentId] = useState(null);
 
@@ -28,6 +29,7 @@ const Comments = ({post}) => {
   
 
   return (   <div className='  max-h-60 overflow-auto bg-slate-200 bg-opacity-40 scroll '>
+    <NewComment postid={post.id} />
 
       {post.Comments.map(c => <ol className='flex items-center gap-3 bg-black bg-opacity-50  pr-1  rounded-lg border' key={c.id}> 
 
@@ -58,6 +60,7 @@ const Comments = ({post}) => {
     >
       delete
     </button>
+    
   </div>
 ) : (
   <div className="flex">

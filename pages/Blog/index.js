@@ -36,9 +36,9 @@ const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
      <title> Blog</title>
     </Head>
       <div className=  ' p-5 text-black bg-gradient-to-br  flex-col gap-5'>
-        <div className='flex  justify-center'> 
+        <div className='flex   justify-center'> 
 
-<h1 className='rounded-xl drop-shadow-lg bg-gradient-to-bl from-green-600 to-green-100 font-serif p-5 text-center md:text-4xl text-3xl lg:text-7xl main'>
+<h1 className='rounded-xl drop-shadow-lg bg-gradient-to-bl from-blue-600 shadow-b to-green-100 font-serif p-5 text-center md:text-4xl text-3xl lg:text-7xl main'>
         Controllex
 </h1>
         </div>
@@ -53,7 +53,7 @@ const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
           <textarea id='input2' className='transition-all duration-500 hover:rounded-sm' cols="30" rows="10" value={form.content} onChange={e => setForm({ ...form, content: e.target.value })}></textarea>
           <label  className='bg-gray-400 p-2 rounded-lg w-max'>Image Url : </label>
           <input className='transition-all duration-500 hover:rounded-sm' id='input3' value={form.img} onChange={e => setForm({ ...form, img: e.target.value })}></input>
-          <Post  input1={form.title} setForm={setForm} data={data} publish={publish} url={url} form={form} />
+          <Post  input1={form.title} setForm={setForm} data={data} tag="Post" publish={publish} url={url} form={form} />
         </div>
          
 <div>
@@ -83,7 +83,8 @@ export const getServerSideProps = async () => {
       published: true,
       
      
-        
+         
+      
       
     
     },
@@ -91,6 +92,11 @@ export const getServerSideProps = async () => {
     include: {
       user: true,
       Comments: {
+        include:{
+          user: true
+        }
+      },
+      hearts: {
         include:{
           user: true
         }

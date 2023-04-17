@@ -1,13 +1,12 @@
 import prisma from '../../../lib/prisma'
 import React, { useEffect, } from 'react'
 import Post from '../../../components/Create'
-import { SafeJson, safeJson } from "../../../lib/formatHelpers";
-import { useState, useRef } from 'react';
+import { SafeJson } from "../../../lib/formatHelpers";
+import { useState } from 'react';
 import { useSession } from "next-auth/react";
 import Users from '@/components/Dashboard/Users';
 import Admin from '@/components/Dashboard/Admins';
 import Head from 'next/head'
-import Link from 'next/link'
 const Blog = ({ Admins, users }) => {
   const session = useSession(false)
   const [NotAdmin, setNotadmin] = useState()
@@ -67,7 +66,7 @@ const Blog = ({ Admins, users }) => {
             </span>
 
             <input className='transition-all duration-500 hover:rounded-sm' id='input3' value={form.img} onChange={e => setForm({ ...form, img: e.target.value })}></input>
-            <Post setForm={setForm} input1={form.emails} data={data} url={url} form={form} />
+            <Post setForm={setForm} input1={form.emails} data={data} tag="Block" url={url} form={form} />
 
 
             <div className='  bg-gradient-to-br from-yellow-500 to-pink-700  flex '>

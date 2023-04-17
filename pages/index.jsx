@@ -61,7 +61,13 @@ published:true,
       include:{
         user:true
       }
+    },
+    hearts: {
+      include:{
+        user: true
+      }
     }
+
           },
         },
         Archives: true
