@@ -4,10 +4,10 @@ import { Inter } from '@next/font/google'
 import Profile from '@/components/Profile/Profile'
 import prisma from '../lib/prisma'
 import { getSession, useSession } from 'next-auth/react'
-import { authOptions } from './api/auth/[...nextauth]'
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { useRouter } from 'next/router'
 import { SafeJson } from '@/lib/formatHelpers'
-// import { SafeJson } from './lib/formatHelpers'
+
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -75,7 +75,6 @@ published:true,
     })
   
       let post = SafeJson(data)
-    // console.log(safeData)
     return{ props: {
       post,  
     }}
