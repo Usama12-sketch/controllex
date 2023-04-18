@@ -1,5 +1,5 @@
 import MainPosts from '@/components/Get/MainPosts';
-import prisma from '@/lib/prisma'
+import prisma from '../../lib/prisma'
 import React from 'react'
 import Post from '@/components/Create'
 import { SafeJson, safeJson } from "@/lib/formatHelpers";
