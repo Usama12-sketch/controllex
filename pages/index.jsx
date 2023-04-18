@@ -74,12 +74,10 @@ published:true,
       }
     })
   
-    
-    const serializedData = JSON.stringify(data);
-    const safeData = JSON.parse(serializedData);   
+      let post = SafeJson(data)
     // console.log(safeData)
     return{ props: {
-      post: safeData,  
+      post,  
     }}
   }
 
