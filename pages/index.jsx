@@ -77,6 +77,7 @@ published:true,
       let post = SafeJson(data)
     return{ props: {
       post,  
+      
     }}
   }
 
