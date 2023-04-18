@@ -61,6 +61,7 @@ const Navbar = ({}) => {
         <Link href=
       {`/${user.id}`}>{user.title}
       </Link>
+      
         </button> 
         </ol>)}
 
