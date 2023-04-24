@@ -97,7 +97,7 @@ const archUrl = "/api/CUD/archives"
             </Link>
 
             <h1 className=' font-semibold bg-clip-text   bg-gradient-to-br from-white to-yellow-500 text-transparent text-3xl lg:text-4xl font-serif'>{post.title}:</h1>
-            <p className=' text-lg '>{post.content.split(' ').slice(0, 5).join(' ')}.....</p>
+            <p className=' text-lg ' dangerouslySetInnerHTML={{__html:post.content }}></p>
 
             <img className=' w-full lg:p-20 ' src={post.img} alt="" />
             <div className=' flex  justify-end'>

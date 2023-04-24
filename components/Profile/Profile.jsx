@@ -99,8 +99,7 @@ const url2 = "/api/CUD/Blog"
 
                     <h1 className=' bg-clip-text bg-gradient-to-br text-3xl font-serif '>{post.title}:</h1>
 
-                    <p className=' text-lg '>{post.content}</p>
-                    <img src={post.img} alt="" />
+                    <p className=' text-lg ' dangerouslySetInnerHTML={{__html:post.content }}></p>
                   
                     <Link className=' bg-orange-500 px-1 w-max rounded-sm text-white' href={`/${post.id}`} >Details</Link>
 

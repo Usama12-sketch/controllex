@@ -55,9 +55,7 @@ console.log (post.json())
 reset()
 }
 
-function rest () {
-  setForm(data)
-}
+
    }
    const path = router.pathname
    

@@ -8,28 +8,28 @@ import { useSession } from "next-auth/react";
 import Link from 'next/link';
 import Head from 'next/head';
 import Image from 'next/image';
-
+import dynamic from 'next/dynamic';
+const Quill = dynamic(() => import("../../components/Quill"), {
+  ssr: false,
+  loading: () => <p>editing..</p>
+})
 
 const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
-  const session = useSession(false)
-
+ const [title, setTitle] = useState("")
+  const [value, setValue] = useState("");
 
 
 
   const url = `/api/CUD/Blog`
-  const url2 = `/api/CUD/Draft`
-  const data = { title: '', content: '', img: ''}
+  const form = { title: title, content: value}
   const publish = {published: true}
 
+  const data = ""
 
-
-  const [form, setForm] = useState(data)
  const [add, setAdd] = useState("hidden")
  
   
   const urlA = "/api/CUD/Blog"
-  console.log(comments)
-  // console.log(Admins)
   return (
     <>
     <Head>
@@ -47,13 +47,10 @@ const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
 
         <div className={`${add ? "hidden" : "flex"} shadow-2xl shadow-green-500 bg-gray-500 hover:bg-gray-800 transition-all duration-500 rounded-sm p-4  flex-col gap-5`}>
           <label  className='bg-gray-400 p-2 rounded-lg w-max'>Title:</label>
-          <input id='input1' className='transition-all duration-500    hover:rounded-sm' value={form.title} onChange={e => setForm({ ...form, title: e.target.value })}></input>
+          <input id='input1' className='text-3xl transition-all duration-500    hover:rounded-sm' value={title} onChange={e => setTitle(e.target.value )}></input>
+         <Quill value={value} setValue={setValue} /> 
 
-          <label  className='bg-gray-400 p-2 rounded-lg w-max'>Content :</label>
-          <textarea id='input2' className='transition-all duration-500 hover:rounded-sm' cols="30" rows="10" value={form.content} onChange={e => setForm({ ...form, content: e.target.value })}></textarea>
-          <label  className='bg-gray-400 p-2 rounded-lg w-max'>Image Url : </label>
-          <input className='transition-all duration-500 hover:rounded-sm' id='input3' value={form.img} onChange={e => setForm({ ...form, img: e.target.value })}></input>
-          <Post  input1={form.title} setForm={setForm} data={data} tag="Post" publish={publish} url={url} form={form} />
+          <Post  input1={form.title} setForm={setTitle} data={data} tag="Post" publish={publish} url={url} form={form} />
         </div>
          
 <div>

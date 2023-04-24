@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { deleteItem, UpdateItem} from '@/lib/function'
 import { useSession } from "next-auth/react";
 
-const ReuseableEdit = ({ id,setDisplay,display, url,  setForm, form, user}) => {
+const ReuseableEdit = ({ id,setDisplay,display, url,  setTitle,setValue, form, user}) => {
   const router = useRouter(false)
   const session = useSession(false)
 
@@ -13,7 +13,8 @@ const ReuseableEdit = ({ id,setDisplay,display, url,  setForm, form, user}) => {
   
 
   function reset() {
-    setForm({ title: '', content: '', img: '' })
+    setTitle("")
+    setValue("")
     setDisplay("hidden");
     router.replace(router.asPath, undefined, {scroll: false})
 
