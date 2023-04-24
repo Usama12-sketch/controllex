@@ -2,16 +2,12 @@ import MainPosts from '@/components/Get/MainPosts';
 import prisma from '../../lib/prisma'
 import React from 'react'
 import Post from '@/components/Create'
-import { SafeJson, safeJson } from "@/lib/formatHelpers";
-import { useState, useRef } from 'react';
-import { useSession } from "next-auth/react";
-import Link from 'next/link';
+import { SafeJson} from "@/lib/formatHelpers";
+import { useState} from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 const Quill = dynamic(() => import("../../components/Quill"), {
   ssr: false,
-  loading: () => <p>editing..</p>
 })
 
 const Blog = ({ posts, Admins, comments, Blocks, archives }) => {

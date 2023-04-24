@@ -11,6 +11,7 @@ const MainEdit = ({post, url, url2}) => {
     const [title, setTitle] = useState("")
     const [value, setValue] = useState("");   
      const [display, setDisplay] = useState("hidden")
+     const [show, setShow] = useState(false)
      const form = { title: title, content: value}
 
 
