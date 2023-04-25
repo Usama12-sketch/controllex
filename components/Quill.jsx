@@ -1,83 +1,70 @@
-import React from 'react'
-import ReactQuill from 'react-quill';
+import React, { useState } from 'react';
+import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import Image from 'next/image';
+import ImageResize from 'quill-image-resize-module-react';
 
-const Quill = ({value, setValue}) => {
-  const  modules  = {
-    toolbar: [
-        [{ font: [] }],
-        [{ header: [1, 2, 3, 4, 5, 6, false] }],
-        ["bold", "italic", "underline", "strike"],
-        [{ color: [] }, { background: [] }],
-        [{ script:  "sub" }, { script:  "super" }],
-        ["blockquote", "code-block"],
-        [{ list:  "ordered" }, { list:  "bullet" }],
-        [{ indent:  "-1" }, { indent:  "+1" }, { align: [] }],
-        ["link", "image", "video"],
-        ["clean"],
-    ],
+Quill.register('modules/imageResize', ImageResize);
+
+const Editor = ({ value, setValue }) => {
+  const [editorHtml, setEditorHtml] = useState('');
+  const [theme, setTheme] = useState('snow');
+
+  const handleChange = (html) => {
+    setValue(html);
+    console.log(html);
   };
-  
-  const renderCustomImage = (props) => {
-    const { src, alt } = props;
-    return <Image src={src} alt={alt} width={500} height={500} />;
+
+  const modules = {
+    toolbar: [
+      [{ header: '1' }, { header: '2' }, { font: [] }],
+      [{ size: [] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [
+        { list: 'ordered' },
+        { list: 'bullet' },
+        { indent: '-1' },
+        { indent: '+1' },
+      ],
+      ['link', 'image', 'video'],
+      ['clean'],
+    ],
+    clipboard: {
+      matchVisual: false,
+    },
+    imageResize: {
+      parchment: Quill.import('parchment'),
+      modules: ['Resize', 'DisplaySize'],
+    },
   };
 
   const formats = [
-    "header",
-    "font",
-    "size",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-    "video",
-    "code-block",
-    "align",
-    "color",
-    "background",
-    "script",
+    'header',
+    'font',
+    'size',
+    'bold',
+    'italic',
+    'underline',
+    'strike',
+    'blockquote',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+    'image',
+    'video',
   ];
 
-  const parseHtml = (html) => {
-    const doc = new DOMParser().parseFromString(html, 'text/html');
-    const imageElements = doc.getElementsByTagName('img');
-
-    for (let i = 0; i < imageElements.length; i++) {
-      const imageElement = imageElements[i];
-      const newImage = document.createElement('img');
-      newImage.setAttribute('src', imageElement.src);
-      newImage.setAttribute('alt', imageElement.alt);
-      newImage.setAttribute('width', '500');
-      newImage.setAttribute('height', '500');
-      imageElement.parentNode.replaceChild(newImage, imageElement);
-    }
-
-    return doc.body.innerHTML;
-  };
-
-  const handleOnChange = (html) => {
-    const parsedHtml = parseHtml(html);
-    setValue(parsedHtml);
-  };
-
   return (
-    <ReactQuill 
-      modules={modules} 
-      theme="snow" 
-      formats={formats} 
-      value={value} 
-      onChange={handleOnChange} 
-      renderCustomImage={renderCustomImage} 
+    <ReactQuill
+      theme={theme}
+      onChange={handleChange}
+      value={value}
+      modules={modules}
+      formats={formats}
+      bounds={'#root'}
+      placeholder=""
     />
   );
 };
 
-export default Quill;
+export default Editor;

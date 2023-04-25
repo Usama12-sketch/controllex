@@ -9,7 +9,7 @@ import Image from 'next/image'
 import {deleteItem , CreateItem} from '@/lib/function'
 
 
-const Post = ({form, url,input1, publish, data ,setForm ,tag}) => {
+const Post = ({form, url,input1, publish, data ,setForm, setValue ,tag}) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const session = useSession(false)
   const router = useRouter()
@@ -19,6 +19,7 @@ const Post = ({form, url,input1, publish, data ,setForm ,tag}) => {
     setForm(data)
     setIsButtonDisabled(false);
     router.replace(router.asPath, undefined, {scroll: false})
+    setValue(" ")
   }
    
       
@@ -74,7 +75,7 @@ reset()
 <button className=' shadow-md rounded bg-blue-600   text-green-200 font-semibold shadow-green-600 lg:w-20 md:w-20 w-10' disabled={isButtonDisabled}  onClick={()=>{Draft(form); }}>Draft</button>
 }
 </div>
-      
+        
       </div>
     </div>
   )

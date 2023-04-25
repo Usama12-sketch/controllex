@@ -17,7 +17,7 @@ const SinglePost = ({post, }) => {
       <div>
 <button className='bg-white text-green-400 font-black font-serif border-b-4 border-green-300 duration-300 hover:border-green-400 px-1 my-1 rounded-md'>Comments:</button>
 </div>
-      <NewComment postid={post.id}  />
+      {/* <NewComment postid={post.id}  /> */}
       <Comments post={post}/>
 </ol>
 }

@@ -20,9 +20,9 @@ export default function Home({post}) {
       <Head>
         <title>{post?.name}</title>
         
-        <meta name="description" content={post.description} />
+        <meta name="description" content={post?.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href={post.image} />
+        <link rel="icon" href={post?.image} />
       </Head>
       <main className=' p-2'>
         {/* <SingleUser user={post.user}/> */}

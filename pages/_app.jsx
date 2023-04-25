@@ -1,12 +1,9 @@
 import '@/styles/globals.css'
 import Authcontext from './auth/Authcontext'
-import { useRouter } from 'next/router'
 import QueryWrapper from '@/components/Comments/QueryWrapper'
 import Navbar from '../components/IndexNavbar'
 import DashBoard from '@/components/DashBoard'
 export default function App({ Component, pageProps, }) {
-  const location = useRouter();
-  const path = location.pathname;
 
   return<>
   <QueryWrapper>

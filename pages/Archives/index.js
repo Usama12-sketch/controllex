@@ -71,7 +71,9 @@ async function Unarchive (id){
         {/* <h1 className='font-mono w-max p-2 rounded-lg bg-slate-400 text-center'>{post.user.name}</h1> */}
         {/* < layout='intrinsic' width={40} height={40} src={post.user.image} alt='' /> */}
         <h1 className='bg-clip-text bg-gradient-to-br text-3xl font-serif'>{post.title}:</h1>
-        <p className='text-lg'>{post.content}</p>
+        
+               <p className='text-lg' dangerouslySetInnerHTML={{__html:post.content}}></p>
+
 <button onClick={()=> Unarchive(post.id)}>UnArchive</button>
       </div>
     </ol>

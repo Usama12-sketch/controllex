@@ -46,7 +46,7 @@ const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
           <input id='input1' className='text-3xl transition-all duration-500    hover:rounded-sm' value={title} onChange={e => setTitle(e.target.value )}></input>
          <Quill value={value} setValue={setValue} /> 
 
-          <Post  input1={form.title} setForm={setTitle} data={data} tag="Post" publish={publish} url={url} form={form} />
+          <Post  input1={title} setValue={setValue} setForm={setTitle} data={data} tag="Post" publish={publish} url={url} form={form} />
         </div>
          
 <div>
