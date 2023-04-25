@@ -41,7 +41,7 @@ const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
 
 <button className=' m-2  bg-purple-300 p-1 rounded-lg font-semibold ' onClick={()=> setAdd(!add)}>{add ? "Add" : "Cancel"} </button>
 
-        <div className={`${add ? "hidden" : "flex"} shadow-2xl shadow-green-500 bg-gray-500 hover:bg-gray-800 transition-all duration-500 rounded-sm p-4  flex-col gap-5`}>
+        <div className={`${add ? "hidden" : "flex"} shadow-2xl shadow-green-500 bg-gray-400 hover:bg-gray-200 transition-all duration-500 rounded-sm p-4  flex-col gap-5`}>
           <label  className='bg-gray-400 p-2 rounded-lg w-max'>Title:</label>
           <input id='input1' className='text-3xl transition-all duration-500    hover:rounded-sm' value={title} onChange={e => setTitle(e.target.value )}></input>
          <Quill value={value} setValue={setValue} /> 

@@ -61,7 +61,7 @@ export const getServerSideProps = async ({params}) =>{
  
     
     const serializedData = JSON.stringify(data);
-    const safeData = JSON.parse(serializedData);   
+    const safeData = JSON.parse(serializedData);   Blog
     console.log(safeData)
     return{ props: {
       post: safeData,
