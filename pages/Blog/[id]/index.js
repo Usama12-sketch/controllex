@@ -4,7 +4,6 @@ import Profile from '@/components/Profile/Profile'
 import prisma from '@/lib/prisma'
 import ImageUpload from '@/components/Main/image'
 
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ post }) {
   return (

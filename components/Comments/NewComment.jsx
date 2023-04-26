@@ -27,7 +27,7 @@ const NewComment = ({postid}) => {
         </div>
 
         <div className={`${show ? "block" : "hidden"} `} >
-        <textarea onBlur={hidesearch} className=' rounded-xl text-sm bg-gray-400 px-2' value={commen.comment} onChange={(e) => setComment({...commen, comment: e.target.value}) } id="" cols="40" rows="2"></textarea>
+        <textarea onBlur={hidesearch} className=' rounded-xl text-sm bg-gray-400 w-full px-2' value={commen.comment} onChange={(e) => setComment({...commen, comment: e.target.value}) } id="" cols="40" rows="2"></textarea>
         <CreateComments input1={commen.comment} name="add" url={url} data={data} form={commen} setShow={setShow} setForm={setComment}/>
     
         </div>

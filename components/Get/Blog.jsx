@@ -97,8 +97,10 @@ const archUrl = "/api/CUD/archives"
             </Link>
 
             <h1 className=' font-semibold bg-clip-text   bg-gradient-to-br from-white to-yellow-500 text-transparent text-3xl lg:text-4xl font-serif'>{post.title}:</h1>
-            <p className=' text-lg ' dangerouslySetInnerHTML={{__html:post.content }}></p>
-
+            
+            
+              <p className=' text-lg flex flex-col ' dangerouslySetInnerHTML={{__html:post.content }}></p>
+            
             <img className=' w-full lg:p-20 ' src={post.img} alt="" />
             <div className=' flex  justify-end'>
 
@@ -106,7 +108,6 @@ const archUrl = "/api/CUD/archives"
               <Link className=' lg:text-xl text-md font-mono bottom-14 right-5 bg-orange-200 px-1 w-max rounded-lg text-gray-800' href={`/${post.id}`} >Details...</Link>
 
             </div>
-            {/* comments and likes */}
 
             <div className=' flex flex-col w-full  '>
               <div className='flex   items-center gap-3 '>
@@ -118,7 +119,7 @@ const archUrl = "/api/CUD/archives"
 <div className= " flex ">
 
               {post.hearts.map((h) => (
-                <ol className="flex " key={h.id}>
+                <ol className="flex  " key={h.id}>
 
     <Link href={`/Blog/${h.user.id}`}>
 <div className=' my-2 flex bg-yellow-300 rounded-2xl duration-500 w-max '>

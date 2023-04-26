@@ -65,7 +65,7 @@ const Navbar = ({}) => {
         </button> 
         </ol>)}
 
-        {search.length > 0 && posts.filter(post => post.content.toLowerCase().includes(search.toLowerCase())).map((post) => {
+        {/* {search.length > 0 && posts.filter(post => post.content.toLowerCase().includes(search.toLowerCase())).map((post) => {
     let words = post.content.split(' ');
     let index = words.findIndex(word => word.toLowerCase().includes(search.toLowerCase()));
     let slicedWords = words.slice(Math.max(0, index - 2), index + 3);
@@ -74,11 +74,11 @@ const Navbar = ({}) => {
         <ol className=' bg-blue-300 p-1 m-3 flex flex-col' key={post.id}>
             <h2 className='font-bold text-lg'>{post.title.split(" ").slice(0 , 3).join(" ") }</h2>
             <button onClick={()=> setSearch("")}>
-                <Link href={`/${post.id}`}>{slicedContent}</Link>
+                <Link href={`/${post.id}`} dangerouslySetInnerHTML={{__html:slicedContent}}></Link>
             </button> 
         </ol>
     );
-})}
+})} */}
 
 
 </div>
