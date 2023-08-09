@@ -32,7 +32,10 @@ export default function Home({ post }) {
 
 export async function getStaticPaths() {
   const posts = await prisma.user.findMany()
-  const paths = posts.map(post => ({
+  
+  const serializedData = JSON.stringify(posts);
+  const pages = JSON.parse(serializedData);
+  const paths = pages.map(post => ({
     params: { id: post.id }
   }))
   return {
