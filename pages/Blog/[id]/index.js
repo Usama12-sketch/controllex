@@ -41,7 +41,7 @@ export async function getStaticPaths() {
   }
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   
   const data = await prisma.user.findUnique({
     where: {
