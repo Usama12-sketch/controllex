@@ -30,6 +30,16 @@ export default function Home({ post }) {
 // }
 
 
+export async function getStaticPaths() {
+  const posts = await prisma.user.findMany()
+  const paths = posts.map(post => ({
+    params: { id: post.id }
+  }))
+  return {
+    paths,
+    fallback: true // See the "fallback" section below
+  }
+}
 
 export async function getServerSideProps({ params }) {
   
@@ -67,5 +77,6 @@ export async function getServerSideProps({ params }) {
     props: {
       post: safeData,
     },
+  
   };
 }

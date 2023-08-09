@@ -49,18 +49,13 @@ const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
           <Post  input1={title} setValue={setValue} setForm={setTitle} data={data} tag="Post" publish={publish} url={url} form={form} />
         </div>
          
-<div>
+<div> 
+
 
 <MainPosts url={urlA} posts={posts} Blocks={Blocks} archives={archives}  Admins={Admins}/>
 </div>
 
       </div>
-
-
-
-
-  
-
 
 </ >
 )
@@ -68,18 +63,12 @@ const Blog = ({ posts, Admins, comments, Blocks, archives }) => {
 
 export default Blog
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
 
   let posts = await prisma.post.findMany({
     
     where:{
       published: true,
-      
-     
-         
-      
-      
-    
     },
 
     include: {
@@ -108,5 +97,6 @@ export const getServerSideProps = async () => {
   // console.log(archives)
   return {
     props: { posts,  Admins, Blocks, archives },
+    revalidate: 86400,
   };
 };
