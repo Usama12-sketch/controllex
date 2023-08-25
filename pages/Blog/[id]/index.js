@@ -30,21 +30,21 @@ export default function Home({ post }) {
 // }
 
 
-export async function getStaticPaths() {
-  const posts = await prisma.user.findMany()
+// export async function getStaticPaths() {
+//   const posts = await prisma.user.findMany()
   
-  const serializedData = JSON.stringify(posts);
-  const pages = JSON.parse(serializedData);
-  const paths = pages.map(post => ({
-    params: { id: post.id }
-  }))
-  return {
-    paths,
-    fallback: true // See the "fallback" section below
-  }
-}
+//   const serializedData = JSON.stringify(posts);
+//   const pages = JSON.parse(serializedData);
+//   const paths = pages.map(post => ({
+//     params: { id: post.id }
+//   }))
+//   return {
+//     paths,
+//     fallback: true // See the "fallback" section below
+//   }
+// }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   
   const data = await prisma.user.findUnique({
     where: {

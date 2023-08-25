@@ -33,7 +33,7 @@ export default function Home({post}) {
 }
 
 
-export const getStaticProps = async ({params}) =>{
+export const getServerSideProps = async ({params}) =>{
   
 
     let  data = await  prisma.post.findUnique({
@@ -69,16 +69,16 @@ export const getStaticProps = async ({params}) =>{
   
   }
 
-  export async function getStaticPaths() {
-    const posts = await prisma.post.findMany()
-    const serializedData = JSON.stringify(posts);
-  const pages = JSON.parse(serializedData);
+  // export async function getStaticPaths() {
+  //   const posts = await prisma.post.findMany()
+  //   const serializedData = JSON.stringify(posts);
+  // const pages = JSON.parse(serializedData);
 
-    const paths = pages.map(post => ({
-      params: { id: post.id }
-    }))
-    return {
-      paths,
-      fallback: true // See the "fallback" section below
-    }
-  }
+  //   const paths = pages.map(post => ({
+  //     params: { id: post.id }
+  //   }))
+  //   return {
+  //     paths,
+  //     fallback: true // See the "fallback" section below
+  //   }
+  // }
